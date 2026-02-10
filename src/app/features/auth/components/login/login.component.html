@@ -1,0 +1,63 @@
+<div class="login-wrapper">
+  <!-- Visual Side (Left) -->
+  <div class="visual-side">
+    <div class="visual-content">
+      <div class="brand">
+        <span class="logo-text">Publicar3D</span>
+      </div>
+      <div class="hero-text">
+        <h1>The Future of <span class="text-gradient">Augmented Reality</span></h1>
+        <p>Create immersive 3D experiences, manage your assets, and analyze engagement.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Form Side (Right) -->
+  <div class="form-side">
+    <div class="glow-bg"></div>
+
+    <div class="form-card">
+      <div class="login-header">
+        <h2>LOGIN</h2>
+        <p>Welcome back. Sign in to your account.</p>
+      </div>
+
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+        <!-- Inputs -->
+        <app-input-field placeholder="Email Address" type="email" prefixIcon="mail_outline" formControlName="email">
+        </app-input-field>
+
+        <app-input-field placeholder="Password" type="password" prefixIcon="lock_outline" formControlName="password">
+        </app-input-field>
+
+        <div class="form-options">
+          <mat-checkbox formControlName="rememberMe" color="primary">
+            Remember Me
+          </mat-checkbox>
+          <a routerLink="/auth/forgot-password" class="forgot-password">
+            Forgot Password?
+          </a>
+        </div>
+
+        <app-button text="Login" [loading]="loading" (clicked)="onSubmit()">
+        </app-button>
+
+        <!-- Divider -->
+        <div class="divider">
+          <span>or</span>
+        </div>
+
+        <!-- Google Button (Explicit Option) -->
+        <button type="button" class="google-btn" (click)="loginWithGoogle()">
+          <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google">
+          <span>Sign in with Google</span>
+        </button>
+
+        <!-- Register Link -->
+        <div class="register-link">
+          Don't have an account? <a routerLink="/auth/register">Sign up</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

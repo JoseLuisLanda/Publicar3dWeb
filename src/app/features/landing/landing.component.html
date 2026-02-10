@@ -1,0 +1,299 @@
+<div class="landing-container">
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="#" class="logo">
+                <span class="logo-icon">P3D</span>
+                <span class="logo-text">Publicar<span class="highlight">3D</span></span>
+            </a>
+
+            <div class="nav-links">
+                <a href="#features">{{ 'landing.features.title' | translate }}</a>
+                <a href="#stats">{{ 'landing.stats.subtitle' | translate }}</a>
+                <a href="#creators">Creators</a>
+                <a routerLink="/auth/login" class="nav-link-login">{{ 'common.login' | translate }}</a>
+                <button routerLink="/auth/register" class="btn-primary-nav">{{ 'landing.hero.cta' | translate
+                    }}</button>
+
+                <!-- Language Switcher -->
+                <div class="language-switcher">
+                    <button (click)="switchLanguage('en')" [class.active]="currentLang() === 'en'"
+                        class="lang-btn">EN</button>
+                    <button (click)="switchLanguage('es')" [class.active]="currentLang() === 'es'"
+                        class="lang-btn">ES</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero-section">
+        <div class="hero-background">
+            <div class="hero-grid"></div>
+            <div class="hero-glow"></div>
+        </div>
+
+        <div class="hero-content">
+            <div class="hero-left">
+                <div class="hero-badge">
+                    <mat-icon>auto_awesome</mat-icon>
+                    <span>AI-POWERED 3D EXPERIENCES</span>
+                </div>
+
+                <h1 class="hero-title">
+                    Create<br>
+                    <span class="gradient-text">Immersive 3D</span><br>
+                    Experiences
+                </h1>
+
+                <p class="hero-description">
+                    {{ 'landing.hero.subtitle' | translate }}
+                </p>
+
+                <div class="hero-actions">
+                    <button routerLink="/auth/register" class="btn-hero-primary">
+                        <span>{{ 'landing.hero.cta' | translate }}</span>
+                        <mat-icon>arrow_forward</mat-icon>
+                    </button>
+                    <button class="btn-hero-secondary">
+                        <mat-icon>play_circle</mat-icon>
+                        <span>{{ 'landing.hero.process' | translate }}</span>
+                    </button>
+                </div>
+
+                <div class="hero-stats-mini">
+                    <div class="stat-mini">
+                        <div class="stat-value">20,437</div>
+                        <div class="stat-label">3D Creators</div>
+                    </div>
+                    <div class="stat-mini">
+                        <div class="stat-value">+10k</div>
+                        <div class="stat-label">AR Assets</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-right">
+                <div class="hero-visual-card">
+                    <div class="visual-header">
+                        <span>LIVE STATS</span>
+                        <div class="status-dot"></div>
+                    </div>
+                    <div class="visual-metric">
+                        <div class="metric-label">Active Users</div>
+                        <div class="metric-value">2,842</div>
+                        <div class="metric-chart">
+                            <div class="chart-bar" style="height: 40%"></div>
+                            <div class="chart-bar" style="height: 70%"></div>
+                            <div class="chart-bar" style="height: 50%"></div>
+                            <div class="chart-bar" style="height: 90%"></div>
+                            <div class="chart-bar" style="height: 60%"></div>
+                        </div>
+                    </div>
+                    <div class="visual-metric">
+                        <div class="metric-label">Engagement Rate</div>
+                        <div class="metric-value">+92.5%</div>
+                        <div class="metric-progress">
+                            <div class="progress-fill" style="width: 92.5%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES SECTION -->
+    <section id="features" class="features-section">
+        <div class="section-header">
+            <h2>{{ 'landing.features.title' | translate }}</h2>
+            <p>Powerful tools for creating stunning 3D and AR content</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <mat-icon>view_in_ar</mat-icon>
+                </div>
+                <h3>{{ 'landing.features.immersive.title' | translate }}</h3>
+                <p>{{ 'landing.features.immersive.description' | translate }}</p>
+                <a href="#" class="feature-link">
+                    Learn more <mat-icon>arrow_forward</mat-icon>
+                </a>
+            </div>
+
+            <div class="feature-card featured">
+                <div class="feature-badge">MOST POPULAR</div>
+                <div class="feature-icon">
+                    <mat-icon>inventory_2</mat-icon>
+                </div>
+                <h3>{{ 'landing.features.assets.title' | translate }}</h3>
+                <p>{{ 'landing.features.assets.description' | translate }}</p>
+                <a href="#" class="feature-link">
+                    Learn more <mat-icon>arrow_forward</mat-icon>
+                </a>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <mat-icon>analytics</mat-icon>
+                </div>
+                <h3>{{ 'landing.features.analytics.title' | translate }}</h3>
+                <p>{{ 'landing.features.analytics.description' | translate }}</p>
+                <a href="#" class="feature-link">
+                    Learn more <mat-icon>arrow_forward</mat-icon>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- STATS SECTION -->
+    <section id="stats" class="stats-section">
+        <div class="stats-header">
+            <span class="stats-subtitle">{{ 'landing.stats.subtitle' | translate }}</span>
+            <h2>{{ 'landing.stats.title' | translate }}</h2>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <mat-icon>groups</mat-icon>
+                </div>
+                <div class="stat-number">5M+</div>
+                <div class="stat-label">{{ 'landing.stats.users' | translate }}</div>
+                <div class="stat-growth">
+                    <mat-icon>trending_up</mat-icon>
+                    <span>+12% this month</span>
+                </div>
+            </div>
+
+            <div class="stat-card highlight">
+                <div class="stat-icon">
+                    <mat-icon>sentiment_satisfied_alt</mat-icon>
+                </div>
+                <div class="stat-number">95%</div>
+                <div class="stat-label">{{ 'landing.stats.satisfaction' | translate }}</div>
+                <div class="stat-circle">
+                    <svg viewBox="0 0 36 36" class="circular-chart">
+                        <path class="circle-bg"
+                            d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                        <path class="circle" stroke-dasharray="95, 100"
+                            d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                    </svg>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <mat-icon>rocket_launch</mat-icon>
+                </div>
+                <div class="stat-number">300+</div>
+                <div class="stat-label">{{ 'landing.stats.projects' | translate }}</div>
+                <div class="stat-growth">
+                    <mat-icon>trending_up</mat-icon>
+                    <span>+8% this month</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CREATORS SECTION -->
+    <section id="creators" class="creators-section">
+        <div class="section-header">
+            <h2>Featured Creators</h2>
+            <a href="#" class="view-all">
+                View all <mat-icon>arrow_forward</mat-icon>
+            </a>
+        </div>
+
+        <div class="creators-grid">
+            <div class="creator-card">
+                <div class="creator-avatar">
+                    <img src="https://i.pravatar.cc/150?img=1" alt="Creator">
+                    <div class="creator-badge">PRO</div>
+                </div>
+                <h4>Alex Thompson</h4>
+                <p class="creator-role">3D Environment Artist</p>
+                <div class="creator-stats">
+                    <div class="creator-stat">
+                        <mat-icon>star</mat-icon>
+                        <span>4.9</span>
+                    </div>
+                    <div class="creator-stat">
+                        <mat-icon>folder</mat-icon>
+                        <span>47 projects</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="creator-card">
+                <div class="creator-avatar">
+                    <img src="https://i.pravatar.cc/150?img=5" alt="Creator">
+                    <div class="creator-badge">PRO</div>
+                </div>
+                <h4>Sarah Wilson</h4>
+                <p class="creator-role">AR Experience Designer</p>
+                <div class="creator-stats">
+                    <div class="creator-stat">
+                        <mat-icon>star</mat-icon>
+                        <span>5.0</span>
+                    </div>
+                    <div class="creator-stat">
+                        <mat-icon>folder</mat-icon>
+                        <span>62 projects</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="creator-card">
+                <div class="creator-avatar">
+                    <img src="https://i.pravatar.cc/150?img=8" alt="Creator">
+                </div>
+                <h4>David Lee</h4>
+                <p class="creator-role">3D Character Artist</p>
+                <div class="creator-stats">
+                    <div class="creator-stat">
+                        <mat-icon>star</mat-icon>
+                        <span>4.8</span>
+                    </div>
+                    <div class="creator-stat">
+                        <mat-icon>folder</mat-icon>
+                        <span>35 projects</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-left">
+                <a href="#" class="footer-logo">
+                    <span class="logo-icon">P3D</span>
+                    <span class="logo-text">Publicar<span class="highlight">3D</span></span>
+                </a>
+                <p>&copy; 2026 Publicar3D. All rights reserved.</p>
+            </div>
+
+            <div class="footer-links">
+                <div class="footer-group">
+                    <h4>Product</h4>
+                    <a href="#">Features</a>
+                    <a href="#">Pricing</a>
+                    <a href="#">Resources</a>
+                </div>
+                <div class="footer-group">
+                    <h4>Company</h4>
+                    <a href="#">About</a>
+                    <a href="#">Contact</a>
+                    <a href="#">Careers</a>
+                </div>
+                <div class="footer-group">
+                    <h4>Legal</h4>
+                    <a href="#">Privacy</a>
+                    <a href="#">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>

@@ -1,0 +1,276 @@
+{
+    "common": {
+        "appName": "Publicar3D",
+        "welcome": "Bienvenido",
+        "login": "Iniciar Sesión",
+        "logout": "Cerrar Sesión",
+        "register": "Registrarse",
+        "submit": "Enviar",
+        "cancel": "Cancelar",
+        "save": "Guardar",
+        "delete": "Eliminar",
+        "edit": "Editar",
+        "search": "Buscar",
+        "loading": "Cargando...",
+        "error": "Error",
+        "success": "Éxito"
+    },
+    "navigation": {
+        "home": "Inicio",
+        "products": "Productos",
+        "services": "Servicios",
+        "courses": "Cursos",
+        "dashboard": "Panel",
+        "profile": "Perfil",
+        "cart": "Carrito",
+        "about": "Acerca de",
+        "contact": "Contacto"
+    },
+    "auth": {
+        "login": {
+            "title": "Bienvenido de Nuevo",
+            "subtitle": "Inicia sesión en tu cuenta",
+            "email": "Correo Electrónico",
+            "emailPlaceholder": "Ingresa tu correo",
+            "password": "Contraseña",
+            "passwordPlaceholder": "Ingresa tu contraseña",
+            "rememberMe": "Recuérdame",
+            "forgotPassword": "¿Olvidaste tu contraseña?",
+            "signIn": "Iniciar Sesión",
+            "orContinueWith": "O continúa con",
+            "noAccount": "¿No tienes cuenta?",
+            "signUp": "Regístrate"
+        },
+        "register": {
+            "title": "Crear Cuenta",
+            "subtitle": "Únete a Publicar3D hoy",
+            "displayName": "Nombre Completo",
+            "displayNamePlaceholder": "Ingresa tu nombre completo",
+            "email": "Correo Electrónico",
+            "emailPlaceholder": "Ingresa tu correo",
+            "password": "Contraseña",
+            "passwordPlaceholder": "Crea una contraseña",
+            "confirmPassword": "Confirmar Contraseña",
+            "confirmPasswordPlaceholder": "Reingresa tu contraseña",
+            "agreeToTerms": "Acepto los Términos y Condiciones",
+            "signUp": "Crear Cuenta",
+            "orContinueWith": "O regístrate con",
+            "haveAccount": "¿Ya tienes cuenta?",
+            "signIn": "Inicia sesión",
+            "passwordStrength": {
+                "label": "Fortaleza de Contraseña",
+                "none": "Sin contraseña",
+                "weak": "Débil",
+                "medium": "Media",
+                "strong": "Fuerte",
+                "veryStrong": "Muy Fuerte"
+            }
+        },
+        "forgotPassword": {
+            "title": "Restablecer Contraseña",
+            "subtitle": "Ingresa tu correo para recibir instrucciones",
+            "email": "Correo Electrónico",
+            "emailPlaceholder": "Ingresa tu correo",
+            "sendReset": "Enviar Enlace",
+            "backToLogin": "Volver al inicio",
+            "successMessage": "¡Correo enviado! Revisa tu bandeja de entrada."
+        },
+        "errors": {
+            "required": "Este campo es requerido",
+            "invalidEmail": "Correo electrónico inválido",
+            "minLength": "Debe tener al menos {{min}} caracteres",
+            "passwordMismatch": "Las contraseñas no coinciden",
+            "weakPassword": "La contraseña es muy débil",
+            "userNotFound": "No se encontró cuenta con este correo",
+            "invalidPassword": "Contraseña incorrecta",
+            "emailInUse": "El correo ya está en uso",
+            "tooManyRequests": "Demasiados intentos. Intenta más tarde",
+            "generic": "Ocurrió un error. Intenta de nuevo",
+            "termsRequired": "Debes aceptar los términos y condiciones"
+        }
+    },
+    "landing": {
+        "hero": {
+            "title": "El Futuro de la <span class='text-gradient'>Realidad Aumentada</span>",
+            "subtitle": "Crea experiencias 3D inmersivas, gestiona tus activos y analiza la participación con nuestra potente plataforma. Únete a la revolución hoy.",
+            "cta": "Prueba Gratis",
+            "process": "Proceso"
+        },
+        "features": {
+            "title": "Características Principales",
+            "immersive": {
+                "title": "Experiencias 3D Inmersivas",
+                "description": "Crea maravillosas experiencias de realidad virtual y experiencias 3D inmersivas."
+            },
+            "assets": {
+                "title": "Gestión Inteligente de Activos",
+                "description": "Análisis inteligente de experiencias 3D y herramientas de gestión para tus activos."
+            },
+            "analytics": {
+                "title": "Analíticas Potenciadas por IA",
+                "description": "Analíticas impulsadas por IA en tiempo real. Construye con nuestra plataforma."
+            }
+        },
+        "stats": {
+            "title": "Nuestro Impacto",
+            "subtitle": "Estadísticas",
+            "users": "Usuarios Comprometidos",
+            "satisfaction": "Satisfacción del Cliente",
+            "projects": "Proyectos Exitosos"
+        },
+        "creators": {
+            "title": "Creadores Destacados",
+            "viewAll": "Ver todos",
+            "projects": "proyectos"
+        },
+        "sections": {
+            "powerfulTools": "Herramientas poderosas para crear contenido 3D y AR impresionante",
+            "learnMore": "Conocer más",
+            "mostPopular": "MÁS POPULAR",
+            "liveStats": "ESTADÍSTICAS EN VIVO",
+            "activeUsers": "Usuarios Activos",
+            "engagementRate": "Tasa de Participación",
+            "3dCreators": "Creadores 3D",
+            "arAssets": "Activos AR",
+            "thisMonth": "este mes",
+            "aiPowered": "EXPERIENCIAS 3D POTENCIADAS POR IA",
+            "pro": "PRO"
+        }
+    },
+    "dashboard": {
+        "welcome": "Bienvenido de nuevo, {{name}}",
+        "overview": "Resumen",
+        "stats": {
+            "products": "Productos",
+            "orders": "Pedidos",
+            "revenue": "Ingresos",
+            "users": "Usuarios"
+        },
+        "recentActivity": "Actividad Reciente",
+        "quickActions": "Acciones Rápidas"
+    },
+    "home": {
+        "title": "Panel Principal de Publicar3D",
+        "breadcrumbs": {
+            "home": "Inicio",
+            "dashboard": "Panel Unificado"
+        },
+        "sidebar": {
+            "main": "PRINCIPAL",
+            "dashboard": "Panel",
+            "analytics": "Analíticas",
+            "virtualSpaces": "Espacios Virtuales",
+            "marketplace": "Marketplace",
+            "virtualStudio": "Estudio Virtual",
+            "learning": "APRENDIZAJE",
+            "myCourses": "Mis Cursos",
+            "platform": "PLATAFORMA",
+            "arExperiences": "Experiencias AR",
+            "aiTraining": "Entrenamiento IA",
+            "support": "SOPORTE",
+            "helpCenter": "Centro de Ayuda",
+            "new": "Nuevo"
+        },
+        "user": {
+            "profile": "Perfil",
+            "settings": "Configuración",
+            "logout": "Cerrar Sesión"
+        },
+        "search": {
+            "placeholder": "Buscar proyectos, activos o cursos..."
+        },
+        "insights": {
+            "smartInsight": "INSIGHT INTELIGENTE",
+            "qrScanned": "Tu código QR fue escaneado",
+            "times": "veces",
+            "today": "¡hoy!"
+        },
+        "projects": {
+            "title": "Acceso Rápido: Proyectos 3D",
+            "viewAll": "Ver Todos",
+            "active": "Activo",
+            "draft": "Borrador",
+            "lastEdited": "Última edición:",
+            "hoursAgo": "hace horas",
+            "daysAgo": "hace días",
+            "yesterday": "Ayer"
+        },
+        "courses": {
+            "title": "Cursos Activos",
+            "next": "Siguiente:",
+            "browseMarketplace": "Explorar Marketplace"
+        },
+        "stats": {
+            "vrSessions": "Sesiones VR",
+            "storage": "Almacenamiento",
+            "used": "Usado",
+            "vsLastMonth": "vs mes pasado"
+        },
+        "map": {
+            "title": "Mapa de Calor de Interacción QR Global",
+            "subtitle": "Ubicaciones de escaneo en tiempo real",
+            "last24Hours": "Últimas 24 Horas",
+            "totalScans": "Escaneos Totales",
+            "topRegion": "Región Principal",
+            "conversionRate": "Tasa de Conversión",
+            "scans": "Escaneos"
+        },
+        "quickActions": {
+            "title": "ACCIONES RÁPIDAS",
+            "createProject": "Crear Nuevo Proyecto",
+            "upload3DAsset": "Subir Activo 3D",
+            "generateQR": "Generar Código QR"
+        },
+        "exportReport": "Exportar Reporte"
+    },
+    "products": {
+        "title": "Productos",
+        "allProducts": "Todos los Productos",
+        "categories": {
+            "all": "Todos los Productos",
+            "ar": "Productos AR",
+            "vr": "Productos VR",
+            "digital": "Productos Digitales",
+            "physical": "Productos Físicos",
+            "courses": "Cursos",
+            "streaming": "Servicios de Streaming"
+        },
+        "filters": {
+            "price": "Precio",
+            "category": "Categoría",
+            "rating": "Calificación",
+            "sortBy": "Ordenar Por"
+        },
+        "details": {
+            "description": "Descripción",
+            "specifications": "Especificaciones",
+            "reviews": "Reseñas",
+            "addToCart": "Agregar al Carrito",
+            "buyNow": "Comprar Ahora",
+            "price": "Precio",
+            "availability": "Disponibilidad",
+            "inStock": "En Stock",
+            "outOfStock": "Agotado"
+        }
+    },
+    "footer": {
+        "aboutUs": "Acerca de Nosotros",
+        "contactUs": "Contáctanos",
+        "privacyPolicy": "Política de Privacidad",
+        "termsOfService": "Términos de Servicio",
+        "followUs": "Síguenos",
+        "newsletter": "Suscríbete a nuestro boletín",
+        "copyright": "© 2026 Publicar3D. Todos los derechos reservados.",
+        "product": "Producto",
+        "features": "Características",
+        "pricing": "Precios",
+        "resources": "Recursos",
+        "company": "Compañía",
+        "about": "Acerca de",
+        "contact": "Contacto",
+        "careers": "Carreras",
+        "legal": "Legal",
+        "privacy": "Privacidad",
+        "terms": "Términos"
+    }
+}

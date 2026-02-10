@@ -1,0 +1,75 @@
+<div class="register-wrapper">
+    <!-- Visual Side (Left) -->
+    <div class="visual-side">
+        <div class="visual-content">
+            <div class="brand">
+                <span class="logo-text">Publicar3D</span>
+            </div>
+            <div class="hero-text">
+                <h1>The Future of <span class="text-gradient">Augmented Reality</span></h1>
+                <p>Create immersive 3D experiences, manage your assets, and analyze engagement.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Form Side (Right) -->
+    <div class="form-side">
+        <div class="glow-bg"></div>
+
+        <div class="form-card">
+            <div class="register-header">
+                <h2>REGISTER</h2>
+                <p>Create your account to get started.</p>
+            </div>
+
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
+                <!-- Display Name -->
+                <app-input-field placeholder="Full Name" type="text" prefixIcon="person_outline"
+                    formControlName="displayName">
+                </app-input-field>
+
+                <!-- Email -->
+                <app-input-field placeholder="Email Address" type="email" prefixIcon="mail_outline"
+                    formControlName="email">
+                </app-input-field>
+
+                <!-- Password -->
+                <app-input-field placeholder="Password" type="password" prefixIcon="lock_outline"
+                    formControlName="password">
+                </app-input-field>
+
+                <!-- Confirm Password -->
+                <app-input-field placeholder="Confirm Password" type="password" prefixIcon="lock_outline"
+                    formControlName="confirmPassword">
+                </app-input-field>
+
+                <!-- Terms Checkbox -->
+                <div class="terms-section">
+                    <mat-checkbox formControlName="agreeToTerms" color="primary">
+                        I agree to the Terms & Conditions
+                    </mat-checkbox>
+                </div>
+
+                <!-- Submit Button -->
+                <app-button text="Create Account" [loading]="loading" (clicked)="onSubmit()">
+                </app-button>
+
+                <!-- Divider -->
+                <div class="divider">
+                    <span>or</span>
+                </div>
+
+                <!-- Google Button -->
+                <button type="button" class="google-btn" (click)="registerWithGoogle()">
+                    <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google">
+                    <span>Sign up with Google</span>
+                </button>
+
+                <!-- Login Link -->
+                <div class="login-link">
+                    Already have an account? <a routerLink="/auth/login">Sign in</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

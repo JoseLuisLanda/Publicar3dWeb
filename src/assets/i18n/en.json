@@ -1,0 +1,276 @@
+{
+    "common": {
+        "appName": "Publicar3D",
+        "welcome": "Welcome",
+        "login": "Login",
+        "logout": "Logout",
+        "register": "Register",
+        "submit": "Submit",
+        "cancel": "Cancel",
+        "save": "Save",
+        "delete": "Delete",
+        "edit": "Edit",
+        "search": "Search",
+        "loading": "Loading...",
+        "error": "Error",
+        "success": "Success"
+    },
+    "navigation": {
+        "home": "Home",
+        "products": "Products",
+        "services": "Services",
+        "courses": "Courses",
+        "dashboard": "Dashboard",
+        "profile": "Profile",
+        "cart": "Cart",
+        "about": "About",
+        "contact": "Contact"
+    },
+    "auth": {
+        "login": {
+            "title": "Welcome Back",
+            "subtitle": "Sign in to your account",
+            "email": "Email Address",
+            "emailPlaceholder": "Enter your email",
+            "password": "Password",
+            "passwordPlaceholder": "Enter your password",
+            "rememberMe": "Remember me",
+            "forgotPassword": "Forgot password?",
+            "signIn": "Sign In",
+            "orContinueWith": "Or continue with",
+            "noAccount": "Don't have an account?",
+            "signUp": "Sign up"
+        },
+        "register": {
+            "title": "Create Account",
+            "subtitle": "Join Publicar3D today",
+            "displayName": "Full Name",
+            "displayNamePlaceholder": "Enter your full name",
+            "email": "Email Address",
+            "emailPlaceholder": "Enter your email",
+            "password": "Password",
+            "passwordPlaceholder": "Create a password",
+            "confirmPassword": "Confirm Password",
+            "confirmPasswordPlaceholder": "Re-enter your password",
+            "agreeToTerms": "I agree to the Terms and Conditions",
+            "signUp": "Create Account",
+            "orContinueWith": "Or sign up with",
+            "haveAccount": "Already have an account?",
+            "signIn": "Sign in",
+            "passwordStrength": {
+                "label": "Password Strength",
+                "none": "No password",
+                "weak": "Weak",
+                "medium": "Medium",
+                "strong": "Strong",
+                "veryStrong": "Very Strong"
+            }
+        },
+        "forgotPassword": {
+            "title": "Reset Password",
+            "subtitle": "Enter your email to receive reset instructions",
+            "email": "Email Address",
+            "emailPlaceholder": "Enter your email",
+            "sendReset": "Send Reset Link",
+            "backToLogin": "Back to login",
+            "successMessage": "Password reset email sent! Check your inbox."
+        },
+        "errors": {
+            "required": "This field is required",
+            "invalidEmail": "Invalid email address",
+            "minLength": "Must be at least {{min}} characters",
+            "passwordMismatch": "Passwords do not match",
+            "weakPassword": "Password is too weak",
+            "userNotFound": "No account found with this email",
+            "invalidPassword": "Incorrect password",
+            "emailInUse": "Email already in use",
+            "tooManyRequests": "Too many attempts. Please try again later",
+            "generic": "An error occurred. Please try again",
+            "termsRequired": "You must agree to the terms and conditions"
+        }
+    },
+    "landing": {
+        "hero": {
+            "title": "The Future of <span class='text-gradient'>Augmented Reality</span>",
+            "subtitle": "Create immersive 3D experiences, manage your assets, and analyze engagement with our powerful platform. Join the revolution today.",
+            "cta": "Start Free Trial",
+            "process": "Process"
+        },
+        "features": {
+            "title": "Key Features",
+            "immersive": {
+                "title": "Immersive 3D Experiences",
+                "description": "Create marvelous immersive VR experiences of Immersive 3D experiences."
+            },
+            "assets": {
+                "title": "Smart Asset Management",
+                "description": "Smart analysis 3D experiences and manage tools to smart asset management."
+            },
+            "analytics": {
+                "title": "AI-Powered Analytics",
+                "description": "AI-Powered analytics in a datate analytics. Build with our powerful platform."
+            }
+        },
+        "stats": {
+            "title": "Our Impact",
+            "subtitle": "Statistics",
+            "users": "Users Engaged",
+            "satisfaction": "Customer Satisfaction",
+            "projects": "Successful Projects"
+        },
+        "creators": {
+            "title": "Featured Creators",
+            "viewAll": "View all",
+            "projects": "projects"
+        },
+        "sections": {
+            "powerfulTools": "Powerful tools for creating stunning 3D and AR content",
+            "learnMore": "Learn more",
+            "mostPopular": "MOST POPULAR",
+            "liveStats": "LIVE STATS",
+            "activeUsers": "Active Users",
+            "engagementRate": "Engagement Rate",
+            "3dCreators": "3D Creators",
+            "arAssets": "AR Assets",
+            "thisMonth": "this month",
+            "aiPowered": "AI-POWERED 3D EXPERIENCES",
+            "pro": "PRO"
+        }
+    },
+    "dashboard": {
+        "welcome": "Welcome back, {{name}}",
+        "overview": "Overview",
+        "stats": {
+            "products": "Products",
+            "orders": "Orders",
+            "revenue": "Revenue",
+            "users": "Users"
+        },
+        "recentActivity": "Recent Activity",
+        "quickActions": "Quick Actions"
+    },
+    "home": {
+        "title": "Publicar3D Main Dashboard",
+        "breadcrumbs": {
+            "home": "Home",
+            "dashboard": "Unified Dashboard"
+        },
+        "sidebar": {
+            "main": "MAIN",
+            "dashboard": "Dashboard",
+            "analytics": "Analytics",
+            "virtualSpaces": "Virtual Spaces",
+            "marketplace": "Marketplace",
+            "virtualStudio": "Virtual Studio",
+            "learning": "LEARNING",
+            "myCourses": "My Courses",
+            "platform": "PLATFORM",
+            "arExperiences": "AR Experiences",
+            "aiTraining": "AI Training",
+            "support": "SUPPORT",
+            "helpCenter": "Help Center",
+            "new": "New"
+        },
+        "user": {
+            "profile": "Profile",
+            "settings": "Settings",
+            "logout": "Logout"
+        },
+        "search": {
+            "placeholder": "Search projects, assets, or courses..."
+        },
+        "insights": {
+            "smartInsight": "SMART INSIGHT",
+            "qrScanned": "Your QR code was scanned",
+            "times": "times",
+            "today": "today!"
+        },
+        "projects": {
+            "title": "Quick Access: 3D Projects",
+            "viewAll": "View All",
+            "active": "Active",
+            "draft": "Draft",
+            "lastEdited": "Last edited:",
+            "hoursAgo": "hours ago",
+            "daysAgo": "days ago",
+            "yesterday": "Yesterday"
+        },
+        "courses": {
+            "title": "Active Courses",
+            "next": "Next:",
+            "browseMarketplace": "Browse Marketplace"
+        },
+        "stats": {
+            "vrSessions": "VR Sessions",
+            "storage": "Storage",
+            "used": "Used",
+            "vsLastMonth": "vs last mo"
+        },
+        "map": {
+            "title": "Global QR Interaction Heatmap",
+            "subtitle": "Real-time scan locations",
+            "last24Hours": "Last 24 Hours",
+            "totalScans": "Total Scans",
+            "topRegion": "Top Region",
+            "conversionRate": "Conversion Rate",
+            "scans": "Scans"
+        },
+        "quickActions": {
+            "title": "QUICK ACTIONS",
+            "createProject": "Create New Project",
+            "upload3DAsset": "Upload 3D Asset",
+            "generateQR": "Generate QR Code"
+        },
+        "exportReport": "Export Report"
+    },
+    "products": {
+        "title": "Products",
+        "allProducts": "All Products",
+        "categories": {
+            "all": "All Products",
+            "ar": "AR Products",
+            "vr": "VR Products",
+            "digital": "Digital Products",
+            "physical": "Physical Products",
+            "courses": "Courses",
+            "streaming": "Streaming Services"
+        },
+        "filters": {
+            "price": "Price",
+            "category": "Category",
+            "rating": "Rating",
+            "sortBy": "Sort By"
+        },
+        "details": {
+            "description": "Description",
+            "specifications": "Specifications",
+            "reviews": "Reviews",
+            "addToCart": "Add to Cart",
+            "buyNow": "Buy Now",
+            "price": "Price",
+            "availability": "Availability",
+            "inStock": "In Stock",
+            "outOfStock": "Out of Stock"
+        }
+    },
+    "footer": {
+        "aboutUs": "About Us",
+        "contactUs": "Contact Us",
+        "privacyPolicy": "Privacy Policy",
+        "termsOfService": "Terms of Service",
+        "followUs": "Follow Us",
+        "newsletter": "Subscribe to our newsletter",
+        "copyright": "© 2026 Publicar3D. All rights reserved.",
+        "product": "Product",
+        "features": "Features",
+        "pricing": "Pricing",
+        "resources": "Resources",
+        "company": "Company",
+        "about": "About",
+        "contact": "Contact",
+        "careers": "Careers",
+        "legal": "Legal",
+        "privacy": "Privacy",
+        "terms": "Terms"
+    }
+}

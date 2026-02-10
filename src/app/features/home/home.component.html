@@ -1,0 +1,320 @@
+<div class="home-container">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <mat-icon>view_in_ar</mat-icon>
+                <span>Publicar<span class="highlight">3D</span></span>
+            </div>
+        </div>
+
+        <div class="user-profile">
+            <div class="avatar">
+                <img src="https://i.pravatar.cc/150?img={{currentUser()?.uid}}" alt="User">
+            </div>
+            <div class="user-info">
+                <div class="user-name">{{currentUser()?.displayName || 'Alex Chen'}}</div>
+                <div class="user-email">{{currentUser()?.email || 'alex.chen@publicar3d.com'}}</div>
+            </div>
+        </div>
+
+        <nav class="sidebar-menu">
+            <!-- MAIN SECTION -->
+            <div class="menu-section">
+                <div class="menu-section-title">{{ 'home.sidebar.main' | translate }}</div>
+                <button class="menu-item active" (click)="setActiveSection('dashboard')">
+                    <mat-icon>dashboard</mat-icon>
+                    <span>{{ 'home.sidebar.dashboard' | translate }}</span>
+                </button>
+                <button class="menu-item" (click)="setActiveSection('analytics')">
+                    <mat-icon>analytics</mat-icon>
+                    <span>{{ 'home.sidebar.analytics' | translate }}</span>
+                </button>
+                <button class="menu-item" (click)="setActiveSection('virtualSpaces')">
+                    <mat-icon>view_in_ar</mat-icon>
+                    <span>{{ 'home.sidebar.virtualSpaces' | translate }}</span>
+                </button>
+                <button class="menu-item" (click)="setActiveSection('marketplace')">
+                    <mat-icon>store</mat-icon>
+                    <span>{{ 'home.sidebar.marketplace' | translate }}</span>
+                    <span class="badge">{{ 'home.sidebar.new' | translate }}</span>
+                </button>
+                <button class="menu-item" (click)="setActiveSection('virtualStudio')">
+                    <mat-icon>brush</mat-icon>
+                    <span>{{ 'home.sidebar.virtualStudio' | translate }}</span>
+                </button>
+            </div>
+
+            <!-- LEARNING SECTION -->
+            <div class="menu-section">
+                <div class="menu-section-title">{{ 'home.sidebar.learning' | translate }}</div>
+                <button class="menu-item" (click)="setActiveSection('myCourses')">
+                    <mat-icon>school</mat-icon>
+                    <span>{{ 'home.sidebar.myCourses' | translate }}</span>
+                </button>
+            </div>
+
+            <!-- PLATFORM SECTION -->
+            <div class="menu-section">
+                <div class="menu-section-title">{{ 'home.sidebar.platform' | translate }}</div>
+                <button class="menu-item" (click)="setActiveSection('arExperiences')">
+                    <mat-icon>explore</mat-icon>
+                    <span>{{ 'home.sidebar.arExperiences' | translate }}</span>
+                </button>
+                <button class="menu-item" (click)="setActiveSection('aiTraining')">
+                    <mat-icon>psychology</mat-icon>
+                    <span>{{ 'home.sidebar.aiTraining' | translate }}</span>
+                </button>
+            </div>
+
+            <!-- SUPPORT SECTION -->
+            <div class="menu-section">
+                <div class="menu-section-title">{{ 'home.sidebar.support' | translate }}</div>
+                <button class="menu-item" (click)="setActiveSection('helpCenter')">
+                    <mat-icon>help</mat-icon>
+                    <span>{{ 'home.sidebar.helpCenter' | translate }}</span>
+                </button>
+            </div>
+        </nav>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+        <!-- TOP BAR -->
+        <header class="top-bar">
+            <div class="breadcrumbs">
+                <span>{{ 'home.breadcrumbs.home' | translate }}</span>
+                <mat-icon>chevron_right</mat-icon>
+                <span>{{ 'home.breadcrumbs.dashboard' | translate }}</span>
+            </div>
+
+            <div class="top-bar-actions">
+                <div class="search-box">
+                    <mat-icon>search</mat-icon>
+                    <input type="text" [placeholder]="'home.search.placeholder' | translate">
+                </div>
+
+                <button class="btn-export">
+                    <mat-icon>file_download</mat-icon>
+                    <span>{{ 'home.exportReport' | translate }}</span>
+                </button>
+
+                <button class="btn-notifications">
+                    <mat-icon [matBadge]="3" matBadgeColor="warn">notifications</mat-icon>
+                </button>
+
+                <div class="language-switcher">
+                    <button (click)="switchLanguage('en')" [class.active]="currentLang() === 'en'"
+                        class="lang-btn">EN</button>
+                    <button (click)="switchLanguage('es')" [class.active]="currentLang() === 'es'"
+                        class="lang-btn">ES</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- DASHBOARD CONTENT -->
+        <div class="dashboard-content">
+            <!-- PAGE TITLE -->
+            <h1 class="page-title">{{ 'home.title' | translate }}</h1>
+
+            <!-- SMART INSIGHT BANNER -->
+            <div class="insight-banner">
+                <mat-icon>auto_awesome</mat-icon>
+                <div class="insight-content">
+                    <div class="insight-label">{{ 'home.insights.smartInsight' | translate }}</div>
+                    <div class="insight-text">
+                        {{ 'home.insights.qrScanned' | translate }}
+                        <strong>58 {{ 'home.insights.times' | translate }}</strong>
+                        {{ 'home.insights.today' | translate }}
+                    </div>
+                </div>
+                <button class="btn-close">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </div>
+
+            <!-- MAIN GRID -->
+            <div class="dashboard-grid">
+                <!-- PROJECTS SECTION -->
+                <div class="projects-section">
+                    <div class="section-header">
+                        <h2>{{ 'home.projects.title' | translate }}</h2>
+                        <a href="#" class="link-view-all">{{ 'home.projects.viewAll' | translate }}</a>
+                    </div>
+
+                    <div class="projects-grid">
+                        <div class="project-card">
+                            <div class="project-status active">{{ 'home.projects.active' | translate }}</div>
+                            <div class="project-icon">
+                                <mat-icon>view_in_ar</mat-icon>
+                            </div>
+                            <h3 class="project-title">Retail Showcase AR</h3>
+                            <p class="project-meta">{{ 'home.projects.lastEdited' | translate }} 2 {{
+                                'home.projects.hoursAgo' | translate }}</p>
+                            <div class="project-avatars">
+                                <img src="https://i.pravatar.cc/40?img=1" alt="User">
+                                <img src="https://i.pravatar.cc/40?img=2" alt="User">
+                            </div>
+                        </div>
+
+                        <div class="project-card">
+                            <div class="project-status draft">{{ 'home.projects.draft' | translate }}</div>
+                            <div class="project-icon">
+                                <mat-icon>apartment</mat-icon>
+                            </div>
+                            <h3 class="project-title">Virtual Museum Hall</h3>
+                            <p class="project-meta">{{ 'home.projects.lastEdited' | translate }} {{
+                                'home.projects.yesterday' | translate }}</p>
+                            <div class="project-avatars">
+                                <img src="https://i.pravatar.cc/40?img=3" alt="User">
+                            </div>
+                        </div>
+
+                        <div class="project-card">
+                            <div class="project-icon">
+                                <mat-icon>directions_car</mat-icon>
+                            </div>
+                            <h3 class="project-title">Auto Configurator v2</h3>
+                            <p class="project-meta">{{ 'home.projects.lastEdited' | translate }} 3 {{
+                                'home.projects.daysAgo' | translate }}</p>
+                            <div class="project-avatars">
+                                <img src="https://i.pravatar.cc/40?img=4" alt="User">
+                                <img src="https://i.pravatar.cc/40?img=5" alt="User">
+                                <span class="avatar-count">+2</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- COURSES + STATS SIDEBAR -->
+                <div class="sidebar-widgets">
+                    <!-- ACTIVE COURSES -->
+                    <div class="widget courses-widget">
+                        <div class="widget-header">
+                            <mat-icon>school</mat-icon>
+                            <h3>{{ 'home.courses.title' | translate }}</h3>
+                        </div>
+
+                        <div class="course-item">
+                            <div class="course-info">
+                                <div class="course-title">Blender for AR Masters</div>
+                                <div class="course-progress">
+                                    <span>75%</span>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 75%"></div>
+                                    </div>
+                                </div>
+                                <div class="course-next">{{ 'home.courses.next' | translate }} Advanced Texturing</div>
+                            </div>
+                        </div>
+
+                        <div class="course-item">
+                            <div class="course-info">
+                                <div class="course-title">Unity Interaction Design</div>
+                                <div class="course-progress">
+                                    <span>32%</span>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill green" style="width: 32%"></div>
+                                    </div>
+                                </div>
+                                <div class="course-next">{{ 'home.courses.next' | translate }} C# Scripting Basics</div>
+                            </div>
+                        </div>
+
+                        <div class="course-item">
+                            <div class="course-info">
+                                <div class="course-title">Marketing Virtual Spaces</div>
+                                <div class="course-progress">
+                                    <span>10%</span>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill purple" style="width: 10%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="btn-browse">{{ 'home.courses.browseMarketplace' | translate }}</button>
+                    </div>
+
+                    <!-- STATS -->
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <span>{{ 'home.stats.vrSessions' | translate }}</span>
+                                <mat-icon>headset_mic</mat-icon>
+                            </div>
+                            <div class="stat-value">45,800</div>
+                            <div class="stat-change positive">+8% {{ 'home.stats.vsLastMonth' | translate }}</div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <span>{{ 'home.stats.storage' | translate }}</span>
+                                <mat-icon>cloud_queue</mat-icon>
+                            </div>
+                            <div class="stat-value">82%</div>
+                            <div class="stat-label">240GB {{ 'home.stats.used' | translate }}</div>
+                        </div>
+                    </div>
+
+                    <!-- QUICK ACTIONS -->
+                    <div class="widget quick-actions">
+                        <h3>{{ 'home.quickActions.title' | translate }}</h3>
+
+                        <button class="action-btn">
+                            <mat-icon>add</mat-icon>
+                            <span>{{ 'home.quickActions.createProject' | translate }}</span>
+                        </button>
+
+                        <button class="action-btn">
+                            <mat-icon>upload</mat-icon>
+                            <span>{{ 'home.quickActions.upload3DAsset' | translate }}</span>
+                        </button>
+
+                        <button class="action-btn">
+                            <mat-icon>qr_code</mat-icon>
+                            <span>{{ 'home.quickActions.generateQR' | translate }}</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GLOBAL MAP -->
+            <div class="map-section">
+                <div class="section-header">
+                    <div>
+                        <h2>{{ 'home.map.title' | translate }}</h2>
+                        <p class="section-subtitle">{{ 'home.map.subtitle' | translate }}</p>
+                    </div>
+                    <span class="badge-time">{{ 'home.map.last24Hours' | translate }}</span>
+                </div>
+
+                <div class="map-container">
+                    <div class="map-placeholder">
+                        <!-- Map visualization would go here -->
+                        <div class="map-dot" style="top: 45%; left: 25%"></div>
+                        <div class="map-dot" style="top: 55%; left: 75%"></div>
+                        <div class="map-dot active" style="top: 35%; left: 50%"></div>
+                        <div class="map-label" style="top: 30%; right: 30%">New York: 124 {{ 'home.map.scans' |
+                            translate }}</div>
+                    </div>
+
+                    <div class="map-stats">
+                        <div class="map-stat">
+                            <span class="stat-label">{{ 'home.map.totalScans' | translate }}</span>
+                            <span class="stat-value">14,203</span>
+                        </div>
+                        <div class="map-stat">
+                            <span class="stat-label">{{ 'home.map.topRegion' | translate }}</span>
+                            <span class="stat-value">North America</span>
+                        </div>
+                        <div class="map-stat">
+                            <span class="stat-label">{{ 'home.map.conversionRate' | translate }}</span>
+                            <span class="stat-value">4.2% <mat-icon class="trend-up">trending_up</mat-icon></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
