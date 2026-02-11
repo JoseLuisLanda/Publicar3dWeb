@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
@@ -33,10 +33,15 @@ export class LandingComponent implements OnInit {
     private router = inject(Router);
     public translate = inject(TranslationService);
 
+    mobileMenuOpen = signal<boolean>(false);
     currentUser$ = this.authService.currentUser$;
 
     ngOnInit() {
         // Optional: Logic to handle authenticated state
+    }
+
+    toggleMobileMenu() {
+        this.mobileMenuOpen.update((v: boolean) => !v);
     }
 
     /**
@@ -51,5 +56,6 @@ export class LandingComponent implements OnInit {
      */
     switchLanguage(lang: string) {
         this.translate.use(lang);
+        this.mobileMenuOpen.set(false); // Close menu on selection
     }
 }

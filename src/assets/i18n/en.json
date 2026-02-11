@@ -272,5 +272,58 @@
         "legal": "Legal",
         "privacy": "Privacy",
         "terms": "Terms"
+    },
+    "ar": {
+        "title": "Augmented Reality Experiences",
+        "back": "Back to Home",
+        "startCamera": "Start AR",
+        "stopCamera": "Stop AR",
+        "loading": "Loading AR experience...",
+        "markerDetected": "Marker Detected",
+        "scanningMarker": "Scanning for marker...",
+        "modes": {
+            "marker": {
+                "title": "Marker-Based AR",
+                "description": "Scan QR codes or custom patterns to display 3D content"
+            },
+            "location": {
+                "title": "Location-Based AR",
+                "description": "Explore AR content at specific GPS coordinates"
+            },
+            "image": {
+                "title": "Image Tracking",
+                "description": "Track images to anchor virtual 3D objects"
+            }
+        },
+        "instructions": {
+            "title": "How to Use AR",
+            "step1": "Select an AR mode (Marker, Location, or Image)",
+            "step2": "Choose a 3D model from the library",
+            "step3": "Click 'Start AR' and point your camera at the marker or location"
+        },
+        "patterns": {
+            "title": "Available Markers",
+            "generate": "Generate Custom Marker"
+        },
+        "models": {
+            "title": "3D Models Library"
+        },
+        "markerGenerator": {
+            "title": "Custom Marker Generator",
+            "subtitle": "Create your own AR markers with custom images",
+            "upload": "Upload Image",
+            "uploadHint": "Click or drag image here (PNG, JPG, SVG)",
+            "patternRatio": "Pattern Ratio",
+            "imageSize": "Image Size",
+            "borderColor": "Border Color",
+            "preview": "Marker Preview",
+            "noPreview": "Upload an image to see preview",
+            "download": "Download Options",
+            "downloadPattern": "Download .patt File",
+            "downloadImage": "Download Marker Image",
+            "downloadPDF": "Download as PDF",
+            "perPage": "per page",
+            "examples": "Example Templates"
+        }
     }
 }

@@ -1,0 +1,130 @@
+<div class="marker-generator">
+    <!-- HEADER -->
+    <div class="generator-header">
+        <div class="header-content">
+            <mat-icon>qr_code_2</mat-icon>
+            <div class="header-text">
+                <h2>{{ 'ar.markerGenerator.title' | translate }}</h2>
+                <p>{{ 'ar.markerGenerator.subtitle' | translate }}</p>
+            </div>
+        </div>
+        <button class="btn-info" (click)="showInfo()">
+            <mat-icon>info</mat-icon>
+        </button>
+    </div>
+
+    <!-- CONTROLS GRID -->
+    <div class="controls-grid">
+        <!-- UPLOAD SECTION -->
+        <div class="control-card">
+            <label for="fileInput" class="upload-zone" [class.has-image]="innerImageURL()">
+                <input type="file" id="fileInput" accept="image/*" (change)="onFileSelected($event)" #fileInput />
+                <div class="upload-content" *ngIf="!innerImageURL()">
+                    <mat-icon>cloud_upload</mat-icon>
+                    <span class="upload-text">{{ 'ar.markerGenerator.upload' | translate }}</span>
+                    <span class="upload-hint">{{ 'ar.markerGenerator.uploadHint' | translate }}</span>
+                </div>
+                <img *ngIf="innerImageURL()" [src]="innerImageURL()" alt="Uploaded image" />
+            </label>
+
+            <!-- PATTERN RATIO SLIDER -->
+            <div class="control-item">
+                <label>
+                    <span class="control-label">{{ 'ar.markerGenerator.patternRatio' | translate }}</span>
+                    <span class="control-value">{{ patternRatio() }}</span>
+                </label>
+                <input type="range" class="slider" min="0.1" max="0.9" step="0.01" [value]="patternRatio()"
+                    (input)="onPatternRatioChange($event)" />
+                <div class="slider-labels">
+                    <span>0.1</span>
+                    <span>0.9</span>
+                </div>
+            </div>
+
+            <!-- IMAGE SIZE SLIDER -->
+            <div class="control-item">
+                <label>
+                    <span class="control-label">{{ 'ar.markerGenerator.imageSize' | translate }}</span>
+                    <span class="control-value">{{ imageSize() }}px</span>
+                </label>
+                <input type="range" class="slider" min="150" max="2500" step="50" [value]="imageSize()"
+                    (input)="onImageSizeChange($event)" />
+                <div class="slider-labels">
+                    <span>150px</span>
+                    <span>2500px</span>
+                </div>
+            </div>
+
+            <!-- BORDER COLOR -->
+            <div class="control-item">
+                <label>
+                    <span class="control-label">{{ 'ar.markerGenerator.borderColor' | translate }}</span>
+                </label>
+                <div class="color-picker-wrapper">
+                    <input type="color" class="color-picker" [value]="borderColor()"
+                        (input)="onBorderColorChange($event)" />
+                    <input type="text" class="color-input" [value]="borderColor()"
+                        (input)="onBorderColorChange($event)" />
+                </div>
+            </div>
+        </div>
+
+        <!-- PREVIEW SECTION -->
+        <div class="preview-card">
+            <h3>{{ 'ar.markerGenerator.preview' | translate }}</h3>
+            <div class="marker-preview" *ngIf="fullMarkerURL()">
+                <img [src]="fullMarkerURL()" alt="Marker preview" />
+            </div>
+            <div class="no-preview" *ngIf="!fullMarkerURL()">
+                <mat-icon>image_not_supported</mat-icon>
+                <p>{{ 'ar.markerGenerator.noPreview' | translate }}</p>
+            </div>
+        </div>
+
+        <!-- DOWNLOAD ACTIONS -->
+        <div class="actions-card">
+            <h3>{{ 'ar.markerGenerator.download' | translate }}</h3>
+
+            <button class="action-btn primary" (click)="downloadPattern()" [disabled]="!innerImageURL()">
+                <mat-icon>download</mat-icon>
+                <span>{{ 'ar.markerGenerator.downloadPattern' | translate }}</span>
+            </button>
+
+            <button class="action-btn" (click)="downloadImage()" [disabled]="!fullMarkerURL()">
+                <mat-icon>image</mat-icon>
+                <span>{{ 'ar.markerGenerator.downloadImage' | translate }}</span>
+            </button>
+
+            <button class="action-btn" (click)="downloadPDF()" [disabled]="!fullMarkerURL()">
+                <mat-icon>picture_as_pdf</mat-icon>
+                <span>{{ 'ar.markerGenerator.downloadPDF' | translate }}</span>
+            </button>
+
+            <div class="pdf-options" *ngIf="showPdfOptions()">
+                <button class="pdf-option-btn" (click)="generatePDF(1)">
+                    <mat-icon>description</mat-icon>
+                    <span>1 {{ 'ar.markerGenerator.perPage' | translate }}</span>
+                </button>
+                <button class="pdf-option-btn" (click)="generatePDF(2)">
+                    <mat-icon>view_column</mat-icon>
+                    <span>2 {{ 'ar.markerGenerator.perPage' | translate }}</span>
+                </button>
+                <button class="pdf-option-btn" (click)="generatePDF(6)">
+                    <mat-icon>grid_view</mat-icon>
+                    <span>6 {{ 'ar.markerGenerator.perPage' | translate }}</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- EXAMPLE MARKERS -->
+    <div class="examples-section" *ngIf="!innerImageURL()">
+        <h3>{{ 'ar.markerGenerator.examples' | translate }}</h3>
+        <div class="examples-grid">
+            <div class="example-item" *ngFor="let example of exampleMarkers" (click)="loadExample(example)">
+                <img [src]="example.imageUrl" [alt]="example.name" />
+                <span>{{ example.name }}</span>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,140 @@
+<div class="ar-container" [class.ar-active]="arActive()">
+    <!-- HEADER -->
+    <header class="ar-header">
+        <button class="btn-back" (click)="goBack()">
+            <mat-icon>arrow_back</mat-icon>
+            <span>{{ 'ar.back' | translate }}</span>
+        </button>
+        <h1>{{ 'ar.title' | translate }}</h1>
+        <div class="ar-controls">
+            <button class="btn-control secondary" (click)="generateCustomMarker()" *ngIf="!arActive()">
+                <mat-icon>add_circle</mat-icon>
+                <span>{{ 'ar.patterns.generate' | translate }}</span>
+            </button>
+            <button class="btn-control" (click)="toggleCamera()" *ngIf="!arActive()">
+                <mat-icon>videocam</mat-icon>
+                <span>{{ 'ar.startCamera' | translate }}</span>
+            </button>
+            <button class="btn-control stop" (click)="stopAr()" *ngIf="arActive()">
+                <mat-icon>stop_circle</mat-icon>
+                <span>{{ 'ar.stopCamera' | translate }}</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- MARKER GENERATOR SECTION -->
+    <!-- MARKER GENERATOR MODAL -->
+    <div class="modal-overlay" *ngIf="showMarkerGenerator()" (click)="closeMarkerGenerator($event)">
+        <div class="modal-content" (click)="$event.stopPropagation()">
+            <button class="btn-close-modal" (click)="closeMarkerGenerator()">
+                <mat-icon>close</mat-icon>
+            </button>
+            <app-marker-generator></app-marker-generator>
+        </div>
+    </div>
+
+    <!-- AR MODE SELECTOR -->
+    <div class="mode-selector" *ngIf="!arActive()">
+        <div class="mode-card" [class.active]="selectedMode() === 'marker'" (click)="selectMode('marker')">
+            <mat-icon>qr_code_scanner</mat-icon>
+            <h3>{{ 'ar.modes.marker.title' | translate }}</h3>
+            <p>{{ 'ar.modes.marker.description' | translate }}</p>
+        </div>
+
+        <div class="mode-card" [class.active]="selectedMode() === 'location'" (click)="selectMode('location')">
+            <mat-icon>location_on</mat-icon>
+            <h3>{{ 'ar.modes.location.title' | translate }}</h3>
+            <p>{{ 'ar.modes.location.description' | translate }}</p>
+        </div>
+
+        <div class="mode-card" [class.active]="selectedMode() === 'image'" (click)="selectMode('image')">
+            <mat-icon>image</mat-icon>
+            <h3>{{ 'ar.modes.image.title' | translate }}</h3>
+            <p>{{ 'ar.modes.image.description' | translate }}</p>
+        </div>
+    </div>
+
+    <!-- INSTRUCTIONS -->
+    <div class="instructions" *ngIf="!arActive()">
+        <mat-icon>info</mat-icon>
+        <div class="instructions-content">
+            <h4>{{ 'ar.instructions.title' | translate }}</h4>
+            <ul>
+                <li>{{ 'ar.instructions.step1' | translate }}</li>
+                <li>{{ 'ar.instructions.step2' | translate }}</li>
+                <li>{{ 'ar.instructions.step3' | translate }}</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- AR VIEWER CONTAINER -->
+    <div id="ar-viewer" *ngIf="arActive()" #arViewer>
+        <!-- A-Frame Scene will be injected here -->
+    </div>
+
+    <!-- AR INFO OVERLAY -->
+    <div class="ar-overlay" *ngIf="arActive()">
+        <div class="ar-stats">
+            <div class="stat-item">
+                <mat-icon>track_changes</mat-icon>
+                <span>{{ markerDetected() ? ('ar.markerDetected' | translate) : ('ar.scanningMarker' | translate)
+                    }}</span>
+            </div>
+            <div class="stat-item" *ngIf="selectedMode() === 'location'">
+                <mat-icon>gps_fixed</mat-icon>
+                <span>{{ gpsAccuracy() }}m</span>
+            </div>
+        </div>
+
+        <div class="ar-actions">
+            <button class="action-btn" (click)="captureScreenshot()">
+                <mat-icon>camera_alt</mat-icon>
+            </button>
+            <button class="action-btn" (click)="toggleDebug()">
+                <mat-icon>bug_report</mat-icon>
+            </button>
+            <button class="action-btn" (click)="switchModel()">
+                <mat-icon>3d_rotation</mat-icon>
+            </button>
+        </div>
+    </div>
+
+    <!-- MARKER PATTERNS GALLERY -->
+    <div class="patterns-gallery" *ngIf="!arActive() && selectedMode() === 'marker'">
+        <h3>{{ 'ar.patterns.title' | translate }}</h3>
+        <div class="patterns-grid">
+            <div class="pattern-card" *ngFor="let pattern of availablePatterns" (click)="selectPattern(pattern)">
+                <img [src]="pattern.imageUrl" [alt]="pattern.name">
+                <span>{{ pattern.name }}</span>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 3D MODELS LIBRARY -->
+    <div class="models-library" *ngIf="!arActive()">
+        <h3>{{ 'ar.models.title' | translate }}</h3>
+        <div class="models-grid">
+            <div class="model-card" *ngFor="let model of available3DModels"
+                [class.selected]="selected3DModel() === model.id" (click)="select3DModel(model)">
+                <div class="model-preview">
+                    <img [src]="model.thumbnailUrl" [alt]="model.name">
+                </div>
+                <div class="model-info">
+                    <h4>{{ model.name }}</h4>
+                    <p>{{ model.description }}</p>
+                    <div class="model-meta">
+                        <span class="file-size">{{ model.fileSize }}</span>
+                        <span class="format">{{ model.format }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- LOADING INDICATOR -->
+    <div class="loading-overlay" *ngIf="loading()">
+        <mat-spinner></mat-spinner>
+        <p>{{ 'ar.loading' | translate }}</p>
+    </div>
+</div>

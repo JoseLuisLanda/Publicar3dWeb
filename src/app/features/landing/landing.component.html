@@ -7,7 +7,13 @@
                 <span class="logo-text">Publicar<span class="highlight">3D</span></span>
             </a>
 
-            <div class="nav-links">
+            <!-- Mobile Menu Toggle -->
+            <button class="mobile-menu-toggle" (click)="toggleMobileMenu()">
+                <mat-icon>{{ mobileMenuOpen() ? 'close' : 'menu' }}</mat-icon>
+            </button>
+
+            <!-- Desktop Nav Links -->
+            <div class="nav-links desktop-only">
                 <a href="#features">{{ 'landing.features.title' | translate }}</a>
                 <a href="#stats">{{ 'landing.stats.subtitle' | translate }}</a>
                 <a href="#creators">Creators</a>
@@ -296,4 +302,27 @@
             </div>
         </div>
     </footer>
+
+    <!-- Mobile Menu Drawer (Outside Navbar Stacking Context) -->
+    <div class="mobile-menu-drawer" [class.open]="mobileMenuOpen()">
+        <button class="close-drawer-btn" (click)="mobileMenuOpen.set(false)">
+            <mat-icon>close</mat-icon>
+        </button>
+        <a href="#features" (click)="mobileMenuOpen.set(false)">{{ 'landing.features.title' | translate }}</a>
+        <a href="#stats" (click)="mobileMenuOpen.set(false)">{{ 'landing.stats.subtitle' | translate }}</a>
+        <a href="#creators" (click)="mobileMenuOpen.set(false)">Creators</a>
+        <a routerLink="/auth/login" class="nav-link-login" (click)="mobileMenuOpen.set(false)">{{ 'common.login' |
+            translate }}</a>
+        <button routerLink="/auth/register" class="btn-primary-nav" (click)="mobileMenuOpen.set(false)">{{
+            'landing.hero.cta' | translate }}</button>
+
+        <!-- Language Switcher -->
+        <div class="language-switcher">
+            <button (click)="switchLanguage('en')" [class.active]="currentLang() === 'en'" class="lang-btn">EN</button>
+            <button (click)="switchLanguage('es')" [class.active]="currentLang() === 'es'" class="lang-btn">ES</button>
+        </div>
+    </div>
+
+    <!-- Mobile Overlay -->
+    <div class="mobile-overlay" [class.active]="mobileMenuOpen()" (click)="toggleMobileMenu()"></div>
 </div>

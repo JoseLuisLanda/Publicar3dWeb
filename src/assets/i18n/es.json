@@ -272,5 +272,58 @@
         "legal": "Legal",
         "privacy": "Privacidad",
         "terms": "Términos"
+    },
+    "ar": {
+        "title": "Experiencias de Realidad Aumentada",
+        "back": "Volver a Inicio",
+        "startCamera": "Iniciar AR",
+        "stopCamera": "Detener AR",
+        "loading": "Cargando experiencia AR...",
+        "markerDetected": "Marcador Detectado",
+        "scanningMarker": "Buscando  marcador...",
+        "modes": {
+            "marker": {
+                "title": "AR Basado en Marcadores",
+                "description": "Escanea códigos QR o patrones personalizados para mostrar contenido 3D"
+            },
+            "location": {
+                "title": "AR Basado en Ubicación",
+                "description": "Explora contenido AR en coordenadas GPS específicas"
+            },
+            "image": {
+                "title": "Seguimiento de Imágenes",
+                "description": "Rastrea imágenes para anclar objetos virtuales 3D"
+            }
+        },
+        "instructions": {
+            "title": "Cómo Usar AR",
+            "step1": "Selecciona un modo AR (Marcador, Ubicación o Imagen)",
+            "step2": "Elige un modelo 3D de la biblioteca",
+            "step3": "Haz clic en 'Iniciar AR' y apunta tu cámara al marcador o ubicación"
+        },
+        "patterns": {
+            "title": "Marcadores Disponibles",
+            "generate": "Generar Marcador Personalizado"
+        },
+        "models": {
+            "title": "Biblioteca de Modelos 3D"
+        },
+        "markerGenerator": {
+            "title": "Generador de Marcadores Personalizados",
+            "subtitle": "Crea tus propios marcadores AR con imágenes personalizadas",
+            "upload": "Subir Imagen",
+            "uploadHint": "Haz clic o arrastra una imagen aquí (PNG, JPG, SVG)",
+            "patternRatio": "Proporción del Patrón",
+            "imageSize": "Tamaño de Imagen",
+            "borderColor": "Color del Borde",
+            "preview": "Vista Previa del Marcador",
+            "noPreview": "Sube una imagen para ver la vista previa",
+            "download": "Opciones de Descarga",
+            "downloadPattern": "Descargar Archivo .patt",
+            "downloadImage": "Descargar Imagen del Marcador",
+            "downloadPDF": "Descargar como PDF",
+            "perPage": "por página",
+            "examples": "Ejemplos de Plantillas"
+        }
     }
 }

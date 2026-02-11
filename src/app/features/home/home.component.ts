@@ -27,6 +27,7 @@ export class HomeComponent {
 
     currentUser = signal<User | null>(null);
     activeSection = signal<string>('dashboard');
+    sidebarOpen = signal<boolean>(false);
 
     constructor() {
         // Subscribe to current user
@@ -46,7 +47,20 @@ export class HomeComponent {
     setActiveSection(section: string): void {
         this.activeSection.set(section);
         console.log('Active section:', section);
-        // Here you could implement routing or content switching
+
+        // Navigate to specific routes for certain sections
+        if (section === 'arExperiences') {
+            this.router.navigate(['/ar-experiences']);
+        }
+        // Here you could implement routing or content switching for other sections
+    }
+
+    toggleSidebar(): void {
+        this.sidebarOpen.update(v => !v);
+    }
+
+    closeSidebar(): void {
+        this.sidebarOpen.set(false);
     }
 
     logout(): void {

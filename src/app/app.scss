@@ -1,0 +1,10 @@
+// Global Application Styles
+body, html {
+    background-color: #030712; // Mantenemos el color de fondo por defecto aquí
+    margin: 0;
+}
+
+// Cuando AR está activo, hacemos transparente el fondo
+body.ar-active, html.ar-active {
+    background-color: transparent !important;
+}

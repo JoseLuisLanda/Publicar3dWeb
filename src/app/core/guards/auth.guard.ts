@@ -42,8 +42,8 @@ export const guestGuard: CanActivateFn = (route, state) => {
                 return true;
             }
 
-            // User is already authenticated, redirect to dashboard
-            router.navigate(['/dashboard']);
+            // User is already authenticated, redirect to home
+            router.navigate(['/home']);
             return false;
         })
     );
