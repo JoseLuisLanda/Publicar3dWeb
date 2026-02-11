@@ -19,6 +19,11 @@ $border-color: rgba(255, 255, 255, 0.1);
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
+// Hide page scroll when AR está activo, pero sin bloquear pinch-to-zoom del navegador
+:host-context(body.ar-active) {
+    overflow: hidden;
+}
+
 // ==================== CONTAINER ====================
 .ar-container {
     width: 100%;
@@ -362,12 +367,40 @@ $border-color: rgba(255, 255, 255, 0.1);
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 50;
+    z-index: 1; // base layer under overlays
     background: transparent;
 
     ::ng-deep a-scene {
         width: 100%;
         height: 100%;
+        position: absolute;
+        inset: 0;
+        z-index: 1 !important;
+        pointer-events: none !important;
+    }
+
+    // Avoid CSS-driven crop/zoom on the video feed
+    ::ng-deep video {
+        position: absolute !important;
+        inset: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: contain !important; // keep full FOV
+        transform: scale(var(--ar-video-scale, 1)) !important;
+        transform-origin: center center !important;
+        z-index: 2 !important;
+        pointer-events: none !important;
+    }
+
+    ::ng-deep canvas {
+        position: absolute !important;
+        inset: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        z-index: 3 !important; // keep AR render above video but below overlays
+        pointer-events: none !important;
+        transform: scale(var(--ar-canvas-scale, 1)) translateZ(0) !important;
+        transform-origin: center center !important;
     }
 }
 
@@ -377,7 +410,7 @@ $border-color: rgba(255, 255, 255, 0.1);
     top: 80px;
     left: 0;
     right: 0;
-    z-index: 60;
+    z-index: 9999;
     padding: 1rem 2rem;
     display: flex;
     justify-content: space-between;
@@ -417,8 +450,37 @@ $border-color: rgba(255, 255, 255, 0.1);
     .ar-actions {
         display: flex;
         flex-direction: column;
-        gap: 0.75rem;
+        gap: 0.75rem;        align-items: flex-end;
 
+        .zoom-control {
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #fff;
+            margin-bottom: 0.5rem;
+
+            input[type="range"] {
+                width: 100px;
+                accent-color: $accent-cyan;
+                cursor: pointer;
+            }
+
+            mat-icon {
+                font-size: 1.25rem;
+                width: 1.25rem;
+                height: 1.25rem;
+                color: $text-secondary;
+            }
+
+            .zoom-hint {
+                font-size: 0.75rem;
+                color: $text-secondary;
+            }
+        }
         .action-btn {
             width: 3.5rem;
             height: 3.5rem;
@@ -693,4 +755,28 @@ $border-color: rgba(255, 255, 255, 0.1);
     .models-library {
         padding: 0 1rem;
     }
+}
+
+// Global overrides in case AR.js injects video/canvas outside the viewer
+:host ::ng-deep video#arjs-video,
+:host ::ng-deep body > video#arjs-video,
+:host ::ng-deep canvas#a-canvas,
+:host ::ng-deep body > canvas#a-canvas,
+:host ::ng-deep body > canvas { // fallback for AR.js canvases
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    transform: scale(var(--ar-video-scale, 1)) !important;
+    transform-origin: center center !important;
+    pointer-events: none !important;
+    z-index: 2 !important;
+}
+
+:host ::ng-deep canvas#a-canvas,
+:host ::ng-deep body > canvas#a-canvas,
+:host ::ng-deep body > canvas {
+    z-index: 3 !important;
+    transform: scale(var(--ar-canvas-scale, 1)) translateZ(0) !important;
 }

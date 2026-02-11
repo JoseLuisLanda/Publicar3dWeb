@@ -87,6 +87,19 @@
         </div>
 
         <div class="ar-actions">
+            <!-- Zoom Control (show always; use native zoom when available, CSS fallback otherwise) -->
+            <div class="zoom-control" *ngIf="arActive()">
+                <mat-icon>zoom_out</mat-icon>
+                <input type="range" 
+                    [min]="minZoom()" 
+                    [max]="maxZoom()" 
+                    step="0.1" 
+                    [value]="zoomLevel()" 
+                    (input)="setZoom($event)">
+                <mat-icon>zoom_in</mat-icon>
+                <span class="zoom-hint" *ngIf="!hasZoomSupport()">(ajuste por software)</span>
+            </div>
+
             <button class="action-btn" (click)="captureScreenshot()">
                 <mat-icon>camera_alt</mat-icon>
             </button>

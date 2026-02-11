@@ -56,6 +56,11 @@ export class ArExperiencesComponent implements OnDestroy {
     gpsAccuracy = signal<number>(0);
     selected3DModel = signal<string>('box');
     showMarkerGenerator = signal<boolean>(false);
+    zoomLevel = signal<number>(1);
+    hasZoomSupport = signal<boolean>(false);
+    minZoom = signal<number>(0.5); // allow zoom-out via CSS fallback
+    maxZoom = signal<number>(2.5);
+    private cssZoomValue = 1; // track CSS fallback scale
 
     // AR Scene reference
     private arScene: any = null;
@@ -183,6 +188,10 @@ export class ArExperiencesComponent implements OnDestroy {
         document.body.classList.remove('ar-active');
         document.documentElement.classList.remove('ar-active');
 
+        // Reset zoom
+        this.zoomLevel.set(1);
+        this.hasZoomSupport.set(false);
+
         if (this.arScene) {
             // Clean up A-Frame scene
             const sceneEl = document.querySelector('a-scene');
@@ -239,7 +248,19 @@ export class ArExperiencesComponent implements OnDestroy {
         // Create A-Frame scene
         const scene = document.createElement('a-scene');
         scene.setAttribute('embedded', '');
-        scene.setAttribute('arjs', 'sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;');
+        
+        // Dynamic configuration based on device
+        scene.setAttribute(
+            'arjs',
+            // Let AR.js choose camera defaults to avoid browser-enforced crop/resize
+            `sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3; facingMode: environment;`
+        );
+        
+        scene.setAttribute('renderer', 'logarithmicDepthBuffer: true;'); // Better depth rendering
+        scene.setAttribute('vr-mode-ui', 'enabled: false'); // Disable patterns VR button
+
+        // Initialize Zoom Capabilities once the underlying video is ready
+        this.observeVideoForZoom();
 
         // Create marker
         const marker = document.createElement('a-marker');
@@ -435,7 +456,112 @@ export class ArExperiencesComponent implements OnDestroy {
         }
     }
 
+    private observeVideoForZoom(): void {
+        const findVideo = (): HTMLVideoElement | null => {
+            // AR.js usually injects #arjs-video; fall back to the first video tag
+            const specific = document.querySelector('video#arjs-video') as HTMLVideoElement | null;
+            return specific || (document.querySelector('video') as HTMLVideoElement | null);
+        };
 
+        const tryOnce = () => {
+            const video = findVideo();
+            if (video && video.srcObject) {
+                this.checkZoomCapabilities(video);
+                return true;
+            }
+            return false;
+        };
+
+        // Try immediately
+        if (tryOnce()) return;
+
+        // Observe DOM until video appears
+        const observer = new MutationObserver(() => {
+            if (tryOnce()) {
+                observer.disconnect();
+            }
+        });
+        observer.observe(document.body, { childList: true, subtree: true });
+    }
+
+    private checkZoomCapabilities(video: HTMLVideoElement): void {
+        console.log('Checking zoom capabilities...');
+        const stream = video.srcObject as MediaStream | null;
+        if (!stream) return;
+
+        const tracks = stream.getVideoTracks();
+        if (!tracks.length) return;
+
+        const track = tracks[0] as any;
+        const capabilities = track.getCapabilities ? track.getCapabilities() : {};
+        const settings = track.getSettings ? track.getSettings() : {};
+
+        console.log('Track capabilities:', capabilities);
+
+        if ('zoom' in capabilities) {
+            this.hasZoomSupport.set(true);
+            this.minZoom.set(capabilities.zoom.min);
+            this.maxZoom.set(capabilities.zoom.max);
+
+            const targetZoom = settings.zoom ?? capabilities.zoom.min ?? 1;
+            this.zoomLevel.set(targetZoom);
+
+            // Actively set zoom to the minimum/default to avoid device default zoom
+            if (track.applyConstraints) {
+                track.applyConstraints({ advanced: [{ zoom: targetZoom }] })
+                    .then(() => console.log('Initial zoom set to', targetZoom))
+                    .catch((err: any) => console.warn('Unable to set initial zoom', err));
+            }
+            console.log('Zoom supported:', capabilities.zoom);
+        } else {
+            console.warn('Zoom not supported by this camera/browser');
+            this.hasZoomSupport.set(false);
+            // Software fallback: start at 1 (sin zoom inicial)
+            const fallbackZoom = 1;
+            this.minZoom.set(0.5);
+            this.maxZoom.set(2);
+            this.zoomLevel.set(fallbackZoom);
+            this.applyCssZoomFallback(fallbackZoom);
+        }
+    }
+
+    setZoom(event: any): void {
+        const value = parseFloat(event.target.value);
+        this.zoomLevel.set(value);
+        
+        const video = document.querySelector('video') as HTMLVideoElement | null;
+        if (this.hasZoomSupport()) {
+            const video = document.querySelector('video') as HTMLVideoElement | null;
+            if (video && video.srcObject) {
+            const stream = video.srcObject as MediaStream;
+            const track = stream.getVideoTracks()[0] as any;
+            
+                if (track.applyConstraints) {
+                    track.applyConstraints({
+                        advanced: [{ zoom: value }]
+                    }).then(() => console.log('Zoom set to', value))
+                      .catch((err: any) => console.error('Error setting zoom:', err));
+                }
+            }
+            return;
+        }
+
+        // Fallback: apply CSS scale when hardware zoom is unavailable
+        this.applyCssZoomFallback(value);
+    }
+
+    private applyCssZoomFallback(value: number): void {
+        this.cssZoomValue = value;
+        const viewer = this.arViewerRef?.nativeElement as HTMLElement | null;
+        if (viewer) {
+            viewer.style.setProperty('--ar-video-scale', `${value}`);
+            viewer.style.setProperty('--ar-canvas-scale', `${value}`);
+        }
+        // Also propagate globally for AR.js-injected nodes outside the viewer
+        const root = document.documentElement;
+        root.style.setProperty('--ar-video-scale', `${value}`);
+        root.style.setProperty('--ar-canvas-scale', `${value}`);
+    }
 
     generateCustomMarker(): void {
         this.showMarkerGenerator.set(true);
