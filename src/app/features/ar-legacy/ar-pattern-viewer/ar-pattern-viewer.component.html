@@ -9,19 +9,11 @@
     <!-- A-Frame AR Scene -->
     <a-scene
         vr-mode-ui="enabled: false"
-        color-space="sRGB"
-        renderer="gammaOutput: true"
         embedded
-        arjs="debugUIEnabled: false; sourceType: webcam; patternRatio: 0.85; trackingMethod: best;"
+        arjs="debugUIEnabled: true; sourceType: webcam; patternRatio: 0.85; trackingMethod: best; sourceWidth: 1280; sourceHeight: 960; displayWidth: 1280; displayHeight: 960;"
         gesture-detector
         class="scene"
-        renderer="precision:mediump;
-                 antialias: true;
-                 colorManagement: true;
-                 sortObjects: true;
-                 physicallyCorrectLights: true;
-                 maxCanvasWidth: 1920;
-                 maxCanvasHeight: 1920;">
+        renderer="precision: mediump; antialias: true; colorManagement: true; sortObjects: true;">
         
         <a-assets>
             <!-- Load images -->

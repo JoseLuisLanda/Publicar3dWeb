@@ -3,12 +3,11 @@
 
 /* global AFRAME, THREE */
 
-if (typeof AFRAME === 'undefined') {
-  throw new Error('Component attempted to register before AFRAME was available.');
-}
+if (typeof AFRAME !== 'undefined') {
+  console.log('✅ Registering gesture components...');
 
-// Gesture Detector Component
-AFRAME.registerComponent('gesture-detector', {
+  // Gesture Detector Component
+  AFRAME.registerComponent('gesture-detector', {
   schema: {
     element: { default: '' }
   },
@@ -202,3 +201,8 @@ AFRAME.registerComponent('gesture-handler', {
     }
   }
 });
+
+  console.log('✅ Gesture components registered successfully');
+} else {
+  console.warn('⚠️ AFRAME not available when gesture-detector.js loaded');
+}

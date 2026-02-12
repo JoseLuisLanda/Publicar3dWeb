@@ -8,6 +8,8 @@ export interface ArElement {
     description?: string;
     type?: string;
     url?: string;
+    src?: string;
+    value?: string;
     email?: string;
     position?: string;
     latitude?: string;
