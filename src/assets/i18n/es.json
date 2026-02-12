@@ -165,6 +165,7 @@
             "learning": "APRENDIZAJE",
             "myCourses": "Mis Cursos",
             "platform": "PLATAFORMA",
+            "arInfo": "Info AR",
             "arExperiences": "Experiencias AR",
             "aiTraining": "Entrenamiento IA",
             "support": "SOPORTE",
@@ -325,5 +326,18 @@
             "perPage": "por página",
             "examples": "Ejemplos de Plantillas"
         }
+    },
+    "arInfo": {
+        "title": "Información AR",
+        "subtitle": "Explora y busca elementos AR",
+        "selectPlace": "Seleccionar Lugar",
+        "searchPlaceholder": "Buscar por palabra clave...",
+        "search": "Buscar",
+        "loading": "Cargando elementos...",
+        "results": "Resultados de Búsqueda",
+        "items": "elementos encontrados",
+        "noResults": "No se encontraron resultados",
+        "tryDifferentSearch": "Intenta con otro término de búsqueda o cambia la ubicación",
+        "moreInfo": "Más Info"
     }
 }

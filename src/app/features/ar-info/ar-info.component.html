@@ -1,0 +1,187 @@
+<div class="ar-info-container">
+    <!-- Header -->
+    <header class="ar-info-header">
+        <button class="back-btn" (click)="goBack()">
+            <mat-icon>arrow_back</mat-icon>
+        </button>
+        <div class="header-content">
+            <h1 class="page-title">{{ 'arInfo.title' | translate }}</h1>
+            <p class="page-subtitle">{{ 'arInfo.subtitle' | translate }}</p>
+        </div>
+        <div class="language-switcher">
+            <button (click)="switchLanguage('en')" [class.active]="currentLang() === 'en'" class="lang-btn">EN</button>
+            <button (click)="switchLanguage('es')" [class.active]="currentLang() === 'es'" class="lang-btn">ES</button>
+        </div>
+    </header>
+
+    <!-- Search Section -->
+    <section class="search-section">
+        <mat-card class="search-card">
+            <div class="search-controls">
+                <!-- Place Selection -->
+                <mat-form-field class="place-selector" appearance="outline">
+                    <mat-label>{{ 'arInfo.selectPlace' | translate }}</mat-label>
+                    <mat-select [value]="selectedPlace()" (selectionChange)="onSelectChange($event.value)">
+                        <mat-option value="lugares">Lugares</mat-option>
+                        <mat-option value="negocio">Negocio</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <!-- Keyword Search -->
+                <div class="keyword-search">
+                    <mat-form-field class="search-input" appearance="outline">
+                        <mat-label>{{ 'arInfo.searchPlaceholder' | translate }}</mat-label>
+                        <input matInput [(ngModel)]="searchFilter" (keyup.enter)="buscarProd()" placeholder="Opcional: filtra por palabra clave...">
+                        <mat-icon matPrefix>search</mat-icon>
+                        @if (searchFilter) {
+                            <button matSuffix mat-icon-button (click)="clearSearch()">
+                                <mat-icon>close</mat-icon>
+                            </button>
+                        }
+                    </mat-form-field>
+                    <button mat-raised-button color="primary" (click)="buscarProd()" class="search-btn">
+                        {{ searchFilter ? ('arInfo.search' | translate) : 'Refrescar' }}
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Debug Info (Development mode) -->
+            <div class="debug-info">
+                <small>
+                    <strong>Buscando en:</strong> {{ folder() }} | 
+                    <strong>Código:</strong> {{ code() }} |
+                    <strong>Lugar:</strong> {{ location() }}
+                </small>
+            </div>
+        </mat-card>
+    </section>
+
+    <!-- Error Message -->
+    @if (textError()) {
+        <div class="error-message">
+            <mat-icon>error</mat-icon>
+            <span>{{ textError() }}</span>
+        </div>
+    }
+
+    <!-- Loading Spinner -->
+    @if (loading()) {
+        <div class="loading-container">
+            <mat-spinner></mat-spinner>
+            <p>{{ 'arInfo.loading' | translate }}</p>
+        </div>
+    }
+
+    <!-- Results Section -->
+    <section class="results-section" [class.loading]="loading()">
+        <div class="results-header">
+            <h2>{{ 'arInfo.results' | translate }}</h2>
+            <span class="results-count">{{ searchElements().length }} {{ 'arInfo.items' | translate }}</span>
+        </div>
+
+        <div class="cards-grid">
+            @for (element of searchElements(); track i; let i = $index) {
+                <mat-card class="element-card">
+                    <!-- Carousel for images -->
+                    @if (element.images && element.images.length > 0) {
+                        <div class="card-carousel">
+                            @for (image of element.images; track idx; let idx = $index) {
+                                <div class="carousel-item" [class.active]="idx === 0">
+                                    <div class="card-header">
+                                        <h3 class="card-title">{{ element.name }}</h3>
+                                        @if (image.name) {
+                                            <h4 class="card-subtitle">{{ image.name }}</h4>
+                                        }
+                                    </div>
+
+                                    <!-- Image/Video Content -->
+                                    <div class="card-media" (click)="showItem(element, image)">
+                                        @if (image.type === 'image' || image.type === 'model' || image.type === 'vcard') {
+                                            <img [src]="image.url" [alt]="image.name || element.name" class="card-image">
+                                        }
+                                        @if (image.type === 'video') {
+                                            <video controls class="card-video">
+                                                <source [src]="image.url" type="video/mp4">
+                                                Your browser does not support the video tag.
+                                            </video>
+                                        }
+                                    </div>
+
+                                    <!-- Card Actions -->
+                                    <div class="card-actions">
+                                        @if (emailConfirmed()) {
+                                            <button mat-button color="warn" (click)="switchToPlace(element)">
+                                                <mat-icon>qr_code</mat-icon>
+                                                QR
+                                            </button>
+                                        }
+                                        @if (image.elements) {
+                                            <button mat-raised-button color="primary" (click)="showItem(element, image)">
+                                                <mat-icon>info</mat-icon>
+                                                {{ 'arInfo.moreInfo' | translate }}
+                                            </button>
+                                        }
+                                        @if (emailConfirmed()) {
+                                            <button mat-button (click)="switchTo3D(element)">
+                                                <mat-icon>view_in_ar</mat-icon>
+                                                3D
+                                            </button>
+                                        }
+                                    </div>
+
+                                    <!-- Card Footer -->
+                                    @if (image.email || image.title) {
+                                        <div class="card-footer">
+                                            @if (image.email) {
+                                                <p class="email">{{ image.email }}</p>
+                                            }
+                                            @if (image.title) {
+                                                <p class="subtitle">{{ image.title }}</p>
+                                            }
+                                        </div>
+                                    }
+                                </div>
+                            }
+                        </div>
+                    } @else {
+                        <!-- Card without images -->
+                        <div class="card-header">
+                            <h3 class="card-title">{{ element.name }}</h3>
+                        </div>
+                        @if (element.description) {
+                            <div class="card-content">
+                                <p>{{ element.description }}</p>
+                            </div>
+                        }
+                        <div class="card-actions">
+                            @if (emailConfirmed()) {
+                                <button mat-button color="warn" (click)="switchToPlace(element)">
+                                    <mat-icon>qr_code</mat-icon>
+                                    QR
+                                </button>
+                                <button mat-button (click)="switchTo3D(element)">
+                                    <mat-icon>view_in_ar</mat-icon>
+                                    3D
+                                </button>
+                            }
+                        </div>
+                    }
+                </mat-card>
+            }
+        </div>
+
+        @if (searchElements().length === 0 && !loading() && !textError()) {
+            <div class="empty-state">
+                <mat-icon>search_off</mat-icon>
+                <h3>{{ 'arInfo.noResults' | translate }}</h3>
+                <p>{{ 'arInfo.tryDifferentSearch' | translate }}</p>
+                <p class="debug-hint">
+                    <small>
+                        💡 Verifica la consola del navegador (F12) para más detalles sobre la búsqueda en 
+                        <strong>{{ folder() }}</strong> con código <strong>{{ code() }}</strong>
+                    </small>
+                </p>
+            </div>
+        }
+    </section>
+</div>

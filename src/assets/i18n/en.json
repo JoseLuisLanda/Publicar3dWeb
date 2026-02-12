@@ -165,6 +165,7 @@
             "learning": "LEARNING",
             "myCourses": "My Courses",
             "platform": "PLATFORM",
+            "arInfo": "AR Info",
             "arExperiences": "AR Experiences",
             "aiTraining": "AI Training",
             "support": "SUPPORT",
@@ -325,5 +326,18 @@
             "perPage": "per page",
             "examples": "Example Templates"
         }
+    },
+    "arInfo": {
+        "title": "AR Information",
+        "subtitle": "Explore and search AR elements",
+        "selectPlace": "Select Place",
+        "searchPlaceholder": "Search by keyword...",
+        "search": "Search",
+        "loading": "Loading elements...",
+        "results": "Search Results",
+        "items": "items found",
+        "noResults": "No results found",
+        "tryDifferentSearch": "Try a different search term or change the location",
+        "moreInfo": "More Info"
     }
 }

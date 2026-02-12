@@ -63,6 +63,10 @@
             <!-- PLATFORM SECTION -->
             <div class="menu-section">
                 <div class="menu-section-title">{{ 'home.sidebar.platform' | translate }}</div>
+                <button class="menu-item" routerLink="/ar-info">
+                    <mat-icon>info</mat-icon>
+                    <span>{{ 'home.sidebar.arInfo' | translate }}</span>
+                </button>
                 <button class="menu-item" (click)="setActiveSection('arExperiences')">
                     <mat-icon>explore</mat-icon>
                     <span>{{ 'home.sidebar.arExperiences' | translate }}</span>
