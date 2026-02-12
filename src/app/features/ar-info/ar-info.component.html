@@ -44,15 +44,6 @@
                     </button>
                 </div>
             </div>
-            
-            <!-- Debug Info (Development mode) -->
-            <div class="debug-info">
-                <small>
-                    <strong>Buscando en:</strong> {{ folder() }} | 
-                    <strong>Código:</strong> {{ code() }} |
-                    <strong>Lugar:</strong> {{ location() }}
-                </small>
-            </div>
         </mat-card>
     </section>
 
@@ -175,12 +166,6 @@
                 <mat-icon>search_off</mat-icon>
                 <h3>{{ 'arInfo.noResults' | translate }}</h3>
                 <p>{{ 'arInfo.tryDifferentSearch' | translate }}</p>
-                <p class="debug-hint">
-                    <small>
-                        💡 Verifica la consola del navegador (F12) para más detalles sobre la búsqueda en 
-                        <strong>{{ folder() }}</strong> con código <strong>{{ code() }}</strong>
-                    </small>
-                </p>
             </div>
         }
     </section>
