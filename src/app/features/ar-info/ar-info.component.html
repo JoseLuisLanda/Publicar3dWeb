@@ -31,7 +31,7 @@
                 <div class="keyword-search">
                     <mat-form-field class="search-input" appearance="outline">
                         <mat-label>{{ 'arInfo.searchPlaceholder' | translate }}</mat-label>
-                        <input matInput [(ngModel)]="searchFilter" (keyup.enter)="buscarProd()" placeholder="Opcional: filtra por palabra clave...">
+                        <input matInput [(ngModel)]="searchFilter" (keyup.enter)="buscarProd()">
                         <mat-icon matPrefix>search</mat-icon>
                         @if (searchFilter) {
                             <button matSuffix mat-icon-button (click)="clearSearch()">
@@ -101,19 +101,19 @@
                                     <!-- Card Actions -->
                                     <div class="card-actions">
                                         @if (emailConfirmed()) {
-                                            <button mat-button color="warn" (click)="switchToPlace(element)">
+                                            <button mat-button color="warn" class="action-btn btn-qr" (click)="switchToPlace(element)">
                                                 <mat-icon>qr_code</mat-icon>
                                                 QR
                                             </button>
                                         }
                                         @if (image.elements) {
-                                            <button mat-raised-button color="primary" (click)="showItem(element, image)">
+                                            <button mat-raised-button color="primary" class="action-btn btn-info" (click)="showItem(element, image)">
                                                 <mat-icon>info</mat-icon>
                                                 {{ 'arInfo.moreInfo' | translate }}
                                             </button>
                                         }
                                         @if (emailConfirmed()) {
-                                            <button mat-button (click)="switchTo3D(element)">
+                                            <button mat-button class="action-btn btn-3d" (click)="switchTo3D(element)">
                                                 <mat-icon>view_in_ar</mat-icon>
                                                 3D
                                             </button>
@@ -146,11 +146,11 @@
                         }
                         <div class="card-actions">
                             @if (emailConfirmed()) {
-                                <button mat-button color="warn" (click)="switchToPlace(element)">
+                                <button mat-button color="warn" class="action-btn btn-qr" (click)="switchToPlace(element)">
                                     <mat-icon>qr_code</mat-icon>
                                     QR
                                 </button>
-                                <button mat-button (click)="switchTo3D(element)">
+                                <button mat-button class="action-btn btn-3d" (click)="switchTo3D(element)">
                                     <mat-icon>view_in_ar</mat-icon>
                                     3D
                                 </button>
