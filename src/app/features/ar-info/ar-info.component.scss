@@ -41,122 +41,128 @@ $border-color: rgba(255, 255, 255, 0.1);
     }
 
     > * {
-        transition: all 0.3s ease;
-
-        .action-btn {
-            border-radius: 10px;
-            padding: 0.75rem 1rem;
-            letter-spacing: 0.3px;
-
-            mat-icon {
-                color: inherit !important;
-                font-size: 20px;
-                width: 20px;
-                height: 20px;
-            }
-        }
-
-        .btn-info {
-            background: linear-gradient(135deg, $accent-cyan 0%, $accent-blue 100%) !important;
-            color: $bg-primary !important;
-            box-shadow: 0 4px 12px rgba(0, 217, 255, 0.35);
-
-            &:hover {
-                box-shadow: 0 6px 20px rgba(0, 217, 255, 0.55);
-                transform: translateY(-2px);
-            }
-        }
-
-        .btn-qr {
-            background: linear-gradient(135deg, #ff6b6b 0%, #ff3939 100%) !important;
-            color: #ffffff !important;
-            box-shadow: 0 4px 12px rgba(255, 107, 107, 0.35);
-
-            &:hover {
-                box-shadow: 0 6px 20px rgba(255, 107, 107, 0.6);
-                transform: translateY(-2px);
-            }
-        }
-
-        .btn-3d {
-            background: linear-gradient(135deg, $accent-cyan 0%, rgba(0, 217, 255, 0.75) 100%) !important;
-            color: $bg-primary !important;
-            box-shadow: 0 4px 12px rgba(0, 217, 255, 0.35);
-
-            &:hover {
-                box-shadow: 0 6px 20px rgba(0, 217, 255, 0.55);
-                transform: translateY(-2px);
-            }
-        }
-
-        mat-icon {
-            color: $accent-cyan;
-        }
-
-        &:hover {
-            background: rgba(0, 217, 255, 0.2);
-            transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(0, 217, 255, 0.3);
-        }
+        position: relative;
+        z-index: 1;
     }
 
-    .header-content {
-        flex: 1;
-
-        .page-title {
-            margin: 0;
-            font-size: 2rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, $accent-cyan 0%, $accent-blue 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-
-            @media (max-width: 768px) {
-                font-size: 1.5rem;
-            }
-        }
-
-        .page-subtitle {
-            margin: 0.5rem 0 0;
-            font-size: 0.95rem;
-            color: $text-secondary;
-
-            @media (max-width: 768px) {
-                font-size: 0.85rem;
-            }
-        }
-    }
-
-    .language-switcher {
+    /* Header / Navbar */
+    .ar-info-header {
+        position: sticky;
+        top: 0;
+        z-index: 10;
         display: flex;
-        gap: 0.25rem;
-        background: rgba(255, 255, 255, 0.05);
-        padding: 0.25rem;
-        border-radius: 12px;
-        border: 1px solid $border-color;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        margin-bottom: 2rem;
+        padding: 1rem 1.25rem;
+        background: rgba(0, 0, 0, 0.65);
+        backdrop-filter: blur(24px) saturate(140%);
+        border-radius: 18px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 12px 44px rgba(0, 0, 0, 0.55);
 
-        .lang-btn {
-            background: transparent;
-            border: none;
-            color: $text-secondary;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
+        &::after {
+            content: '';
+            position: absolute;
+            left: 16px;
+            right: 16px;
+            bottom: -1px;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(0, 217, 255, 0) 0%, rgba(0, 217, 255, 0.55) 50%, rgba(0, 217, 255, 0) 100%);
+            pointer-events: none;
+        }
+
+        .back-btn {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(0, 217, 255, 0.45);
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
-            font-weight: 600;
-            font-size: 0.85rem;
             transition: all 0.3s ease;
 
-            &.active {
-                background: $accent-cyan;
-                color: $bg-primary;
-                box-shadow: 0 0 15px rgba(0, 217, 255, 0.4);
+            mat-icon {
+                color: $accent-cyan;
             }
 
-            &:hover:not(.active) {
-                background: rgba(255, 255, 255, 0.1);
-                color: $text-primary;
+            &:hover {
+                background: rgba(0, 217, 255, 0.14);
+                transform: translateY(-1px) scale(1.06);
+                box-shadow: 0 0 0 2px rgba(0, 217, 255, 0.12), 0 0 28px rgba(0, 217, 255, 0.28);
             }
+        }
+
+        .header-content {
+            flex: 1;
+
+            .page-title {
+                margin: 0;
+                font-size: 2rem;
+                font-weight: 700;
+                background: linear-gradient(135deg, $accent-cyan 0%, $accent-blue 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+                text-shadow: 0 6px 20px rgba(0, 0, 0, 0.55);
+
+                @media (max-width: 768px) {
+                    font-size: 1.5rem;
+                }
+            }
+
+            .page-subtitle {
+                margin: 0.5rem 0 0;
+                font-size: 0.95rem;
+                color: rgba(255, 255, 255, 0.72);
+                text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
+
+                @media (max-width: 768px) {
+                    font-size: 0.85rem;
+                }
+            }
+        }
+
+        .language-switcher {
+            display: flex;
+            gap: 0.25rem;
+            background: rgba(0, 0, 0, 0.35);
+            padding: 0.25rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+
+            .lang-btn {
+                background: transparent;
+                border: 1px solid transparent;
+                color: rgba(255, 255, 255, 0.8);
+                padding: 0.5rem 1rem;
+                border-radius: 8px;
+                cursor: pointer;
+                font-weight: 700;
+                font-size: 0.85rem;
+                transition: all 0.3s ease;
+
+                &.active {
+                    background: $accent-cyan;
+                    color: $bg-primary;
+                    box-shadow: 0 0 15px rgba(0, 217, 255, 0.4);
+                    border-color: rgba(255, 255, 255, 0.25);
+                }
+
+                &:hover:not(.active) {
+                    background: rgba(255, 255, 255, 0.08);
+                    border-color: rgba(0, 217, 255, 0.25);
+                    color: #ffffff;
+                }
+            }
+        }
+
+        @media (max-width: 768px) {
+            padding: 0.85rem 1rem;
+            border-radius: 16px;
         }
     }
 }
