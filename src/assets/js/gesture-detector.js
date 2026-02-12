@@ -85,9 +85,11 @@ if (typeof AFRAME !== 'undefined') {
     const gestureStarted = currentState && !gestureContinues;
 
     if (gestureEnded) {
-      const eventName =
-        this.getEventPrefix(previousState.touchCount) + 'ended';
-      this.el.emit(eventName, previousState);
+      const prefix = this.getEventPrefix(previousState.touchCount);
+      // Standard events expected by gesture-handler
+      this.el.emit(prefix + 'end', previousState);
+      // Back-compat
+      this.el.emit(prefix + 'ended', previousState);
       this.internalState.previousState = null;
     }
 
@@ -95,9 +97,11 @@ if (typeof AFRAME !== 'undefined') {
       currentState.startTime = performance.now();
       currentState.startPosition = currentState.position;
       currentState.startSpread = currentState.spread;
-      const eventName =
-        this.getEventPrefix(currentState.touchCount) + 'started';
-      this.el.emit(eventName, currentState);
+      const prefix = this.getEventPrefix(currentState.touchCount);
+      // Standard events expected by gesture-handler
+      this.el.emit(prefix + 'start', currentState);
+      // Back-compat
+      this.el.emit(prefix + 'started', currentState);
       this.internalState.previousState = currentState;
     }
 
@@ -119,9 +123,11 @@ if (typeof AFRAME !== 'undefined') {
       // Add state data to event detail
       Object.assign(eventDetail, previousState);
 
-      const eventName =
-        this.getEventPrefix(currentState.touchCount) + 'moved';
-      this.el.emit(eventName, eventDetail);
+      const prefix = this.getEventPrefix(currentState.touchCount);
+      // Standard events expected by gesture-handler
+      this.el.emit(prefix + 'move', eventDetail);
+      // Back-compat
+      this.el.emit(prefix + 'moved', eventDetail);
     }
   },
 
@@ -170,8 +176,8 @@ if (typeof AFRAME !== 'undefined') {
   },
 
   getEventPrefix(touchCount) {
-    const numberNames = ['one', 'two', 'three', 'many'];
-    return numberNames[Math.min(touchCount, 4) - 1];
+    const prefixes = ['onefinger', 'twofinger', 'threefinger', 'manyfinger'];
+    return prefixes[Math.min(touchCount, 4) - 1];
   }
 });
 
