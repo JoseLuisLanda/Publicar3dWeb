@@ -1,0 +1,57 @@
+<div class="ar-pattern-container">
+    <!-- Back Button -->
+    <div class="buttons-left">
+        <button (click)="goToHome()" type="button" class="btn-back">
+            <mat-icon>arrow_back</mat-icon>
+        </button>
+    </div>
+
+    <!-- A-Frame AR Scene -->
+    <a-scene
+        vr-mode-ui="enabled: false"
+        color-space="sRGB"
+        renderer="gammaOutput: true"
+        embedded
+        arjs="debugUIEnabled: false; sourceType: webcam; patternRatio: 0.85; trackingMethod: best;"
+        gesture-detector
+        class="scene"
+        renderer="precision:mediump;
+                 antialias: true;
+                 colorManagement: true;
+                 sortObjects: true;
+                 physicallyCorrectLights: true;
+                 maxCanvasWidth: 1920;
+                 maxCanvasHeight: 1920;">
+        
+        <a-assets>
+            <!-- Load images -->
+            <ng-container *ngIf="item && item.images">
+                <ng-container *ngFor="let image of item.images; let i = index">
+                    <!-- Images -->
+                    <img *ngIf="image.type === 'image' || image.type === 'vcard' || image.type === 'poster' || !image.type"
+                         [id]="'img' + i"
+                         [src]="image.url"
+                         crossorigin="anonymous" />
+                    
+                    <!-- Videos -->
+                    <video *ngIf="image.type === 'video'"
+                           [id]="'video' + (tagNumberInit + i)"
+                           crossOrigin="anonymous"
+                           playsinline
+                           webkitplaysinline
+                           controls
+                           muted
+                           [src]="image.url"></video>
+                </ng-container>
+            </ng-container>
+        </a-assets>
+
+        <!-- Camera -->
+        <a-entity id="userCamera" camera>
+            <a-cursor></a-cursor>
+        </a-entity>
+    </a-scene>
+
+    <!-- Hidden inputs for tracking -->
+    <input type="hidden" id="imgIndex" [value]="currentMarkerIndex" />
+</div>

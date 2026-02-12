@@ -1,0 +1,65 @@
+:host {
+    display: block;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.ar-pattern-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Back Button */
+.buttons-left {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+
+    .btn-back {
+        background: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(10px);
+        border: 2px solid rgba(0, 217, 255, 0.5);
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        color: #00d9ff;
+
+        mat-icon {
+            font-size: 32px;
+            width: 32px;
+            height: 32px;
+        }
+
+        &:hover {
+            background: rgba(0, 217, 255, 0.2);
+            border-color: #00d9ff;
+            transform: scale(1.1);
+        }
+
+        &:active {
+            transform: scale(0.95);
+        }
+    }
+}
+
+/* A-Frame Scene */
+.scene {
+    width: 100%;
+    height: 100vh;
+}
+
+/* AR Active State - Make background transparent */
+:host-context(.ar-active) {
+    .ar-pattern-container {
+        background: transparent !important;
+    }
+}

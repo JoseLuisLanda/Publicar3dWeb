@@ -16,6 +16,7 @@ import { takeUntil } from 'rxjs/operators';
 import { ArElementsService } from './services/ar-elements.service';
 import { ArElement } from './models/ar-element.model';
 import { AuthService } from '../../core/services/auth.service';
+import { ArDataService } from '../ar-legacy/services/ar-data.service';
 
 @Component({
     selector: 'app-ar-info',
@@ -42,6 +43,7 @@ export class ArInfoComponent implements OnInit, OnDestroy {
     private router = inject(Router);
     private route = inject(ActivatedRoute);
     private translate = inject(TranslateService);
+    private arDataService = inject(ArDataService);
     private destroy$ = new Subject<void>();
 
     searchElements = signal<ArElement[]>([]);
@@ -317,19 +319,34 @@ export class ArInfoComponent implements OnInit, OnDestroy {
      * Navigate to 3D view
      */
     switchTo3D(element: ArElement): void {
-        if (element.id) {
-            this.router.navigate(['/ar-experiences'], {
-                queryParams: { id: element.id }
-            });
-        }
+        console.log('🚀 Switch to 3D AR:', element);
+        // Navigate to AR experiences with element data for 3D model viewing
+        this.router.navigate(['/ar-experiences'], {
+            state: {
+                element: element,
+                mode: '3d',
+                type: 'model'
+            }
+        });
     }
 
     /**
      * Navigate to QR view
      */
     switchToPlace(element: ArElement): void {
-        console.log('Switch to place:', element);
-        // Implement QR code functionality
+        console.log('📸 Switch to QR/Pattern AR:', element);
+        
+        // Set element in service for AR Pattern Viewer
+        this.arDataService.setSelectedElement(element);
+        
+        // Navigate to AR Pattern Viewer (similar to legacy qrelement)
+        this.router.navigate(['/ar-pattern-viewer'], {
+            state: {
+                element: element,
+                mode: 'marker',
+                type: 'photos'
+            }
+        });
     }
 
     /**

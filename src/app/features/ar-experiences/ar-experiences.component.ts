@@ -1,4 +1,4 @@
-import { Component, signal, inject, ViewChild, ElementRef, OnDestroy, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { Component, signal, inject, ViewChild, ElementRef, OnInit, OnDestroy, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
@@ -43,7 +43,7 @@ interface AR3DModel {
     templateUrl: './ar-experiences.component.html',
     styleUrls: ['./ar-experiences.component.scss']
 })
-export class ArExperiencesComponent implements OnDestroy {
+export class ArExperiencesComponent implements OnInit, OnDestroy {
     private router = inject(Router);
 
     @ViewChild('arViewer', { static: false }) arViewerRef!: ElementRef;
@@ -65,6 +65,11 @@ export class ArExperiencesComponent implements OnDestroy {
     // AR Scene reference
     private arScene: any = null;
     private camera: any = null;
+    
+    // Element from AR-Info navigation
+    private receivedElement: any = null;
+    private receivedMode: string | null = null;
+    private receivedType: string | null = null;
 
     // Available patterns
     availablePatterns: ARPattern[] = [
@@ -132,6 +137,28 @@ export class ArExperiencesComponent implements OnDestroy {
     ];
 
     selectedPattern: ARPattern = this.availablePatterns[0];
+
+    ngOnInit(): void {
+        // Check if we received element data from navigation state (from AR-Info component)
+        const state = history.state;
+        
+        if (state && state.element) {
+            this.receivedElement = state.element;
+            this.receivedMode = state.mode;
+            this.receivedType = state.type;
+            
+            console.log('📦 Received element from navigation:', this.receivedElement);
+            console.log('🎯 Mode:', this.receivedMode, 'Type:', this.receivedType);
+            
+            // Auto-configure AR experience based on received data
+            if (this.receivedMode === 'marker' || this.receivedMode === '3d') {
+                this.selectedMode.set(this.receivedMode === 'marker' ? 'marker' : 'marker'); // Both use marker mode
+                
+                // If we have images, auto-start AR?
+                // You can decide when to auto-start or let user click start
+            }
+        }
+    }
 
     ngOnDestroy(): void {
         this.stopAr();

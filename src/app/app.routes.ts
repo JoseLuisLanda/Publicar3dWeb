@@ -47,6 +47,11 @@ export const routes: Routes = [
         canActivate: [authGuard]
     },
     {
+        path: 'ar-pattern-viewer',
+        loadComponent: () => import('./features/ar-legacy/ar-pattern-viewer/ar-pattern-viewer.component').then(m => m.ArPatternViewerComponent),
+        canActivate: [authGuard]
+    },
+    {
         path: 'dashboard',
         loadComponent: () => import('./features/dashboard/dashboard.component').then(m => m.DashboardComponent),
         canActivate: [authGuard]
