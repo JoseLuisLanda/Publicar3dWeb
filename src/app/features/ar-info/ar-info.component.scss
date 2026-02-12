@@ -645,62 +645,63 @@ $border-color: rgba(255, 255, 255, 0.1);
         flex-wrap: wrap;
         background: rgba(0, 0, 0, 0.2);
 
-        button {
+        button.action-btn {
             flex: 1;
             min-width: 100px;
-            font-weight: 600;
+            max-width: 150px;
+            font-weight: 800;
+            letter-spacing: 0.3px;
+            border-radius: 10px;
+            padding: 0.75rem 1rem;
             transition: all 0.3s ease;
 
             mat-icon {
                 margin-right: 0.5rem;
+                color: inherit !important;
             }
-            
-            // Primary button (More Info)
-            &.mat-raised-button {
-                background: linear-gradient(135deg, $accent-cyan 0%, $accent-blue 100%) !important;
-                color: $bg-primary !important;
-                border: none;
-                box-shadow: 0 4px 12px rgba(0, 217, 255, 0.4);
-                font-weight: 700;
-                
-                &:hover {
-                    box-shadow: 0 6px 20px rgba(0, 217, 255, 0.6);
-                    transform: translateY(-3px);
-                }
 
-                &:active {
-                    transform: translateY(-1px);
-                }
+            &:hover {
+                transform: translateY(-2px);
             }
-            
-            // QR Button
-            &.mat-button[color="warn"] {
-                color: #ffffff !important;
-                background: linear-gradient(135deg, #ff6b6b 0%, #ff3939 100%);
-                border: 2px solid transparent;
-                box-shadow: 0 4px 12px rgba(255, 107, 107, 0.4);
-                font-weight: 700;
-                
-                &:hover {
-                    background: linear-gradient(135deg, #ff7f7f 0%, #ff5555 100%);
-                    box-shadow: 0 6px 20px rgba(255, 107, 107, 0.6);
-                    transform: translateY(-2px);
-                }
+
+            &:active {
+                transform: translateY(-1px);
             }
-            
-            // 3D Button
-            &.mat-button:not([color]) {
-                color: $bg-primary !important;
-                background: linear-gradient(135deg, $accent-cyan 0%, #00b8d4 100%);
-                border: 2px solid transparent;
-                box-shadow: 0 4px 12px rgba(0, 217, 255, 0.4);
-                font-weight: 700;
-                
-                &:hover {
-                    background: linear-gradient(135deg, #00e4ff 0%, #00d4e8 100%);
-                    box-shadow: 0 6px 20px rgba(0, 217, 255, 0.6);
-                    transform: translateY(-2px);
-                }
+        }
+
+        /* More info */
+        button.btn-info {
+            background: linear-gradient(135deg, $accent-cyan 0%, $accent-blue 100%) !important;
+            color: $bg-primary !important;
+            border: none !important;
+            box-shadow: 0 4px 12px rgba(0, 217, 255, 0.45);
+
+            &:hover {
+                box-shadow: 0 6px 20px rgba(0, 217, 255, 0.65);
+            }
+        }
+
+        /* QR */
+        button.btn-qr {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ff3939 100%) !important;
+            color: #ffffff !important;
+            border: none !important;
+            box-shadow: 0 4px 12px rgba(255, 107, 107, 0.45);
+
+            &:hover {
+                box-shadow: 0 6px 20px rgba(255, 107, 107, 0.7);
+            }
+        }
+
+        /* 3D */
+        button.btn-3d {
+            background: linear-gradient(135deg, $accent-cyan 0%, #00b8d4 100%) !important;
+            color: $bg-primary !important;
+            border: none !important;
+            box-shadow: 0 4px 12px rgba(0, 217, 255, 0.45);
+
+            &:hover {
+                box-shadow: 0 6px 20px rgba(0, 217, 255, 0.7);
             }
         }
     }
