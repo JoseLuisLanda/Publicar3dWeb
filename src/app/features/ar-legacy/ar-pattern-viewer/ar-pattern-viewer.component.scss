@@ -55,6 +55,11 @@
 .scene {
     width: 100%;
     height: 100vh;
+    touch-action: none;
+}
+
+.scene canvas {
+    touch-action: none;
 }
 
 /* AR Active State - Make background transparent */

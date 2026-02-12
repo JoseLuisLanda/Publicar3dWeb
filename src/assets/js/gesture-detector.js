@@ -13,31 +13,66 @@ if (typeof AFRAME !== 'undefined') {
   },
 
   init: function () {
-    this.targetElement =
-      this.data.element && document.querySelector(this.data.element);
-
-    if (!this.targetElement) {
-      this.targetElement = this.el;
-    }
-
     this.internalState = {
       previousState: null
     };
 
     this.emitGestureEvent = this.emitGestureEvent.bind(this);
+    this.bindToTarget = this.bindToTarget.bind(this);
 
-    this.targetElement.addEventListener('touchstart', this.emitGestureEvent);
-    this.targetElement.addEventListener('touchend', this.emitGestureEvent);
-    this.targetElement.addEventListener('touchmove', this.emitGestureEvent);
+    // Prefer listening on the <canvas> to reliably receive touch events.
+    // If a selector is provided, use it; otherwise use the canvas when available.
+    this.targetElement = this.data.element && document.querySelector(this.data.element);
+
+    // Try to bind immediately and also after the scene is loaded (canvas is created then)
+    this.bindToTarget();
+    if (this.el && this.el.addEventListener) {
+      this.el.addEventListener('loaded', this.bindToTarget);
+    }
+  },
+
+  bindToTarget: function () {
+    const canvas = this.el && this.el.canvas ? this.el.canvas : (this.el && this.el.sceneEl && this.el.sceneEl.canvas);
+    const nextTarget = this.targetElement || canvas || this.el;
+
+    if (!nextTarget) return;
+    if (this._boundTarget === nextTarget) return;
+
+    // Unbind previous
+    if (this._boundTarget) {
+      this._boundTarget.removeEventListener('touchstart', this.emitGestureEvent);
+      this._boundTarget.removeEventListener('touchend', this.emitGestureEvent);
+      this._boundTarget.removeEventListener('touchmove', this.emitGestureEvent);
+    }
+
+    this._boundTarget = nextTarget;
+
+    // Use passive:false so we can preventDefault on touchmove (avoid page scroll/zoom)
+    const opts = { passive: false };
+    this._boundTarget.addEventListener('touchstart', this.emitGestureEvent, opts);
+    this._boundTarget.addEventListener('touchend', this.emitGestureEvent, opts);
+    this._boundTarget.addEventListener('touchmove', this.emitGestureEvent, opts);
   },
 
   remove: function () {
-    this.targetElement.removeEventListener('touchstart', this.emitGestureEvent);
-    this.targetElement.removeEventListener('touchend', this.emitGestureEvent);
-    this.targetElement.removeEventListener('touchmove', this.emitGestureEvent);
+    if (this.el && this.el.removeEventListener) {
+      this.el.removeEventListener('loaded', this.bindToTarget);
+    }
+
+    if (this._boundTarget) {
+      this._boundTarget.removeEventListener('touchstart', this.emitGestureEvent);
+      this._boundTarget.removeEventListener('touchend', this.emitGestureEvent);
+      this._boundTarget.removeEventListener('touchmove', this.emitGestureEvent);
+      this._boundTarget = null;
+    }
   },
 
   emitGestureEvent(event) {
+    // Prevent browser scroll/zoom gesture handling
+    if (event && event.cancelable) {
+      event.preventDefault();
+    }
+
     const currentState = this.getTouchState(event);
     const previousState = this.internalState.previousState;
 
@@ -144,7 +179,8 @@ if (typeof AFRAME !== 'undefined') {
 AFRAME.registerComponent('gesture-handler', {
   schema: {
     enabled: { default: true },
-    rotationFactor: { default: 5 },
+    // positionChange is in pixels; use small factor to avoid huge jumps
+    rotationFactor: { default: 0.01 },
     minScale: { default: 0.3 },
     maxScale: { default: 8 }
   },
@@ -153,17 +189,8 @@ AFRAME.registerComponent('gesture-handler', {
     this.handleScale = this.handleScale.bind(this);
     this.handleRotation = this.handleRotation.bind(this);
 
-    this.isVisible = false;
     this.initialScale = this.el.object3D.scale.clone();
     this.scaleFactor = 1;
-
-    this.el.sceneEl.addEventListener('markerFound', e => {
-      this.isVisible = true;
-    });
-
-    this.el.sceneEl.addEventListener('markerLost', e => {
-      this.isVisible = false;
-    });
   },
 
   play: function () {
@@ -177,16 +204,19 @@ AFRAME.registerComponent('gesture-handler', {
   },
 
   handleRotation: function (event) {
-    if (this.isVisible) {
+    if (!this.data.enabled) return;
+    if (!this.el.object3D || !this.el.object3D.visible) return;
+
       this.el.object3D.rotation.y +=
         event.detail.positionChange.x * this.data.rotationFactor;
       this.el.object3D.rotation.x +=
         event.detail.positionChange.y * this.data.rotationFactor;
-    }
   },
 
   handleScale: function (event) {
-    if (this.isVisible) {
+    if (!this.data.enabled) return;
+    if (!this.el.object3D || !this.el.object3D.visible) return;
+
       this.scaleFactor *=
         1 + event.detail.spreadChange / event.detail.startSpread;
 
@@ -198,7 +228,6 @@ AFRAME.registerComponent('gesture-handler', {
       this.el.object3D.scale.x = this.scaleFactor * this.initialScale.x;
       this.el.object3D.scale.y = this.scaleFactor * this.initialScale.y;
       this.el.object3D.scale.z = this.scaleFactor * this.initialScale.z;
-    }
   }
 });
 
