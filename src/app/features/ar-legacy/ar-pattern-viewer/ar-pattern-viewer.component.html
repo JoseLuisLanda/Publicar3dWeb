@@ -46,4 +46,10 @@
 
     <!-- Hidden inputs for tracking -->
     <input type="hidden" id="imgIndex" [value]="currentMarkerIndex" />
+
+    <!-- Gesture Debug Overlay (local testing) -->
+    <div class="gesture-debug" *ngIf="gestureDebugEnabled">
+        <div class="gesture-debug__title">Gestures Debug</div>
+        <pre class="gesture-debug__body">{{ gestureDebugText }}</pre>
+    </div>
 </div>

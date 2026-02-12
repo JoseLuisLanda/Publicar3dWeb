@@ -3,6 +3,17 @@
 
 /* global AFRAME, THREE */
 
+function getGestureDebug() {
+  if (typeof window === 'undefined') return null;
+  window.__PUBLICAR3D_GESTURE_DEBUG = window.__PUBLICAR3D_GESTURE_DEBUG || {
+    counters: { touchstart: 0, touchmove: 0, touchend: 0 },
+    touch: {},
+    gesture: {},
+    handler: { rotateCalls: 0, scaleCalls: 0 }
+  };
+  return window.__PUBLICAR3D_GESTURE_DEBUG;
+}
+
 if (typeof AFRAME !== 'undefined') {
   console.log('✅ Registering gesture components...');
 
@@ -73,6 +84,18 @@ if (typeof AFRAME !== 'undefined') {
       event.preventDefault();
     }
 
+    const dbg = getGestureDebug();
+    if (dbg && event && event.type) {
+      if (event.type === 'touchstart') dbg.counters.touchstart++;
+      if (event.type === 'touchmove') dbg.counters.touchmove++;
+      if (event.type === 'touchend') dbg.counters.touchend++;
+      dbg.touch = {
+        type: event.type,
+        count: event.touches ? event.touches.length : 0,
+        cancelable: !!event.cancelable
+      };
+    }
+
     const currentState = this.getTouchState(event);
     const previousState = this.internalState.previousState;
 
@@ -90,6 +113,10 @@ if (typeof AFRAME !== 'undefined') {
       this.el.emit(prefix + 'end', previousState);
       // Back-compat
       this.el.emit(prefix + 'ended', previousState);
+
+      if (dbg) {
+        dbg.gesture = { name: prefix + 'end' };
+      }
       this.internalState.previousState = null;
     }
 
@@ -102,6 +129,10 @@ if (typeof AFRAME !== 'undefined') {
       this.el.emit(prefix + 'start', currentState);
       // Back-compat
       this.el.emit(prefix + 'started', currentState);
+
+      if (dbg) {
+        dbg.gesture = { name: prefix + 'start' };
+      }
       this.internalState.previousState = currentState;
     }
 
@@ -128,6 +159,15 @@ if (typeof AFRAME !== 'undefined') {
       this.el.emit(prefix + 'move', eventDetail);
       // Back-compat
       this.el.emit(prefix + 'moved', eventDetail);
+
+      if (dbg) {
+        dbg.gesture = {
+          name: prefix + 'move',
+          spreadChange: typeof eventDetail.spreadChange === 'number' ? eventDetail.spreadChange.toFixed(3) : null,
+          dx: eventDetail.positionChange ? eventDetail.positionChange.x : null,
+          dy: eventDetail.positionChange ? eventDetail.positionChange.y : null
+        };
+      }
     }
   },
 
@@ -217,6 +257,14 @@ AFRAME.registerComponent('gesture-handler', {
         event.detail.positionChange.x * this.data.rotationFactor;
       this.el.object3D.rotation.x +=
         event.detail.positionChange.y * this.data.rotationFactor;
+
+    const dbg = getGestureDebug();
+    if (dbg) {
+      dbg.handler.rotateCalls = (dbg.handler.rotateCalls || 0) + 1;
+      dbg.handler.visible = !!this.el.object3D.visible;
+      dbg.handler.rotX = Number(this.el.object3D.rotation.x).toFixed(3);
+      dbg.handler.rotY = Number(this.el.object3D.rotation.y).toFixed(3);
+    }
   },
 
   handleScale: function (event) {
@@ -234,6 +282,13 @@ AFRAME.registerComponent('gesture-handler', {
       this.el.object3D.scale.x = this.scaleFactor * this.initialScale.x;
       this.el.object3D.scale.y = this.scaleFactor * this.initialScale.y;
       this.el.object3D.scale.z = this.scaleFactor * this.initialScale.z;
+
+    const dbg = getGestureDebug();
+    if (dbg) {
+      dbg.handler.scaleCalls = (dbg.handler.scaleCalls || 0) + 1;
+      dbg.handler.visible = !!this.el.object3D.visible;
+      dbg.handler.scale = Number(this.el.object3D.scale.x).toFixed(3);
+    }
   }
 });
 

@@ -32,6 +32,11 @@ export class ArPatternViewerComponent implements OnInit, OnDestroy {
     tagNumberLength = 1;
     currentMarkerIndex = 0;
 
+    // Local gesture debug overlay
+    gestureDebugEnabled = true;
+    gestureDebugText = 'Waiting for gesture events...';
+    private gestureDebugTimer: number | null = null;
+
     ngOnInit(): void {
         console.log('🎯 AR Pattern Viewer initialized');
         
@@ -54,6 +59,7 @@ export class ArPatternViewerComponent implements OnInit, OnDestroy {
 
         console.log('📦 Received element:', this.item);
         this.initializeARScene();
+        this.startGestureDebugOverlay();
     }
 
     ngOnDestroy(): void {
@@ -61,6 +67,39 @@ export class ArPatternViewerComponent implements OnInit, OnDestroy {
         this.arDataService.clearSelectedElement();
         document.body.classList.remove('ar-active');
         document.documentElement.classList.remove('ar-active');
+
+        if (this.gestureDebugTimer) {
+            window.clearInterval(this.gestureDebugTimer);
+            this.gestureDebugTimer = null;
+        }
+    }
+
+    private startGestureDebugOverlay(): void {
+        // Poll global debug info produced by gesture-detector.js
+        this.gestureDebugTimer = window.setInterval(() => {
+            const dbg = (window as any).__PUBLICAR3D_GESTURE_DEBUG;
+            if (!dbg) {
+                this.gestureDebugText = 'No debug object yet (waiting for gesture-detector.js)';
+                return;
+            }
+
+            const lines: string[] = [];
+            lines.push(`touch: start=${dbg.counters?.touchstart ?? 0} move=${dbg.counters?.touchmove ?? 0} end=${dbg.counters?.touchend ?? 0}`);
+            if (dbg.touch) {
+                lines.push(`lastTouch: ${dbg.touch.type ?? '-'} pointers=${dbg.touch.count ?? '-'} cancelable=${dbg.touch.cancelable ?? '-'}`);
+            }
+            if (dbg.gesture) {
+                lines.push(`lastGesture: ${dbg.gesture.name ?? '-'} spreadChange=${dbg.gesture.spreadChange ?? '-'} dx=${dbg.gesture.dx ?? '-'} dy=${dbg.gesture.dy ?? '-'}`);
+            }
+            if (dbg.handler) {
+                lines.push(`handler: rotateCalls=${dbg.handler.rotateCalls ?? 0} scaleCalls=${dbg.handler.scaleCalls ?? 0}`);
+                lines.push(`rotation: x=${dbg.handler.rotX ?? '-'} y=${dbg.handler.rotY ?? '-'}`);
+                lines.push(`scale: ${dbg.handler.scale ?? '-'}`);
+                lines.push(`visible: ${dbg.handler.visible ?? '-'}`);
+            }
+
+            this.gestureDebugText = lines.join('\n');
+        }, 250);
     }
 
     /**
