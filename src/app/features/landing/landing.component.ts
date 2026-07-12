@@ -58,4 +58,16 @@ export class LandingComponent implements OnInit {
         this.translate.use(lang);
         this.mobileMenuOpen.set(false); // Close menu on selection
     }
+
+    /**
+     * Logout current user and redirect to landing
+     */
+    async logout(): Promise<void> {
+        try {
+            await this.authService.signOut();
+            this.router.navigate(['/']);
+        } catch (error) {
+            console.error('Logout error', error);
+        }
+    }
 }

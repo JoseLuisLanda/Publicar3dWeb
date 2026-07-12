@@ -133,6 +133,22 @@ $border-color: rgba(255, 255, 255, 0.1);
                 background: rgba(0, 217, 255, 0.05);
             }
         }
+        
+        // Logout button (uses button element)
+        + button.nav-link-logout {
+            color: $text-primary;
+            background: transparent;
+            padding: 0.45rem 0.9rem;
+            border: 1px solid $border-color;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+
+            &:hover {
+                border-color: $accent-cyan;
+                background: rgba(0, 217, 255, 0.05);
+            }
+        }
     }
 }
 

@@ -8,9 +8,27 @@ body {
 	background-color: #030712;
 }
 
+app-root {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
 body.ar-active,
 html.ar-active {
 	background-color: transparent !important;
+	overflow: hidden;
+}
+
+body.ar-active a-scene,
+body.ar-active .a-canvas,
+body.ar-active canvas,
+body.ar-active video#arjs-video,
+body.ar-active video.arjs-video {
+	position: fixed !important;
+	inset: 0 !important;
+	width: 100vw !important;
+	height: 100vh !important;
 }
 
 /* Ensure AR.js video/canvas fill the viewport without letterboxing */

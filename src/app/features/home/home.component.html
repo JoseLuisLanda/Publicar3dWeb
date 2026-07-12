@@ -85,6 +85,15 @@
                     <span>{{ 'home.sidebar.helpCenter' | translate }}</span>
                 </button>
             </div>
+
+            <!-- USER ACTIONS -->
+            <div class="menu-section">
+                <div class="menu-section-title">&nbsp;</div>
+                <button class="menu-item" (click)="logout()">
+                    <mat-icon>logout</mat-icon>
+                    <span>{{ 'common.logout' | translate }}</span>
+                </button>
+            </div>
         </nav>
     </aside>
 

@@ -13,13 +13,19 @@
             </button>
 
             <!-- Desktop Nav Links -->
-            <div class="nav-links desktop-only">
+                <div class="nav-links desktop-only">
                 <a href="#features">{{ 'landing.features.title' | translate }}</a>
                 <a href="#stats">{{ 'landing.stats.subtitle' | translate }}</a>
                 <a href="#creators">Creators</a>
-                <a routerLink="/auth/login" class="nav-link-login">{{ 'common.login' | translate }}</a>
-                <button routerLink="/auth/register" class="btn-primary-nav">{{ 'landing.hero.cta' | translate
-                    }}</button>
+
+                <ng-container *ngIf="(currentUser$ | async) as user; else loggedOut">
+                    <button class="nav-link-logout" (click)="logout()">{{ 'common.logout' | translate }}</button>
+                </ng-container>
+                <ng-template #loggedOut>
+                    <a routerLink="/auth/login" class="nav-link-login">{{ 'common.login' | translate }}</a>
+                    <button routerLink="/auth/register" class="btn-primary-nav">{{ 'landing.hero.cta' | translate
+                        }}</button>
+                </ng-template>
 
                 <!-- Language Switcher -->
                 <div class="language-switcher">
@@ -311,10 +317,13 @@
         <a href="#features" (click)="mobileMenuOpen.set(false)">{{ 'landing.features.title' | translate }}</a>
         <a href="#stats" (click)="mobileMenuOpen.set(false)">{{ 'landing.stats.subtitle' | translate }}</a>
         <a href="#creators" (click)="mobileMenuOpen.set(false)">Creators</a>
-        <a routerLink="/auth/login" class="nav-link-login" (click)="mobileMenuOpen.set(false)">{{ 'common.login' |
-            translate }}</a>
-        <button routerLink="/auth/register" class="btn-primary-nav" (click)="mobileMenuOpen.set(false)">{{
-            'landing.hero.cta' | translate }}</button>
+        <ng-container *ngIf="(currentUser$ | async) as user; else mobileLoggedOut">
+            <button class="nav-link-logout" (click)="logout(); mobileMenuOpen.set(false)">{{ 'common.logout' | translate }}</button>
+        </ng-container>
+        <ng-template #mobileLoggedOut>
+            <a routerLink="/auth/login" class="nav-link-login" (click)="mobileMenuOpen.set(false)">{{ 'common.login' | translate }}</a>
+            <button routerLink="/auth/register" class="btn-primary-nav" (click)="mobileMenuOpen.set(false)">{{ 'landing.hero.cta' | translate }}</button>
+        </ng-template>
 
         <!-- Language Switcher -->
         <div class="language-switcher">

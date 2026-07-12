@@ -10,7 +10,7 @@
     <a-scene
         vr-mode-ui="enabled: false"
         embedded
-        arjs="debugUIEnabled: true; sourceType: webcam; patternRatio: 0.85; trackingMethod: best; sourceWidth: 1280; sourceHeight: 960; displayWidth: 1280; displayHeight: 960;"
+        arjs="debugUIEnabled: false; sourceType: webcam; patternRatio: 0.85; trackingMethod: best; sourceWidth: 1280; sourceHeight: 960;"
         gesture-detector
         class="scene"
         renderer="precision: mediump; antialias: true; colorManagement: true; sortObjects: true;">
@@ -47,9 +47,4 @@
     <!-- Hidden inputs for tracking -->
     <input type="hidden" id="imgIndex" [value]="currentMarkerIndex" />
 
-    <!-- Gesture Debug Overlay (local testing) -->
-    <div class="gesture-debug" *ngIf="gestureDebugEnabled">
-        <div class="gesture-debug__title">Gestures Debug</div>
-        <pre class="gesture-debug__body">{{ gestureDebugText }}</pre>
-    </div>
 </div>
